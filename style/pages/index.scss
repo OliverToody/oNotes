@@ -1,0 +1,179 @@
+$alternative: rgb(225, 225, 225);
+body {
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+    .vue-app {
+        /***************************************/
+        /* Navigation                          */
+        /***************************************/
+        nav {
+            .fas {
+                font-size: 17px !important;
+                color: white !important;
+            }
+            .brand-logo {
+                margin-left: 10px;
+                color: white !important;
+
+            }
+        }
+        /***************************************/
+        /* Note list                           */
+        /***************************************/
+        .note_list {
+            margin: 5px 10px 0px;
+            border: 1px solid transparent;
+            border-bottom: 1px solid $alternative;
+            .row {
+                margin-top: 8px !important;
+                margin: 5px !important;
+                h6 {
+                    color: black;
+                    text-transform: justify;
+                    display: inline-block;
+                    margin: 7px 0px;
+                }
+                .action-buttons {
+                    padding: 10px 10px;
+                    padding-right: 10px;
+                    text-align: right;
+                    i {
+                        margin: 2px;
+                        color: gray;
+                    }
+                }
+                .date {
+                    color: dimgray;
+                }
+                .note-cat {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 45px;
+                }
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        /***************************************/
+        /* Working bech                        */
+        /***************************************/
+        .col.m9 {
+            min-height: 80vh;
+        }
+        .working-bench {
+            margin: 20px;
+            height: 80vh;
+            .controls {
+                padding: 10px;
+                background: $alternative;
+                margin: 0px auto;
+                i {
+                    margin:auto 10px;
+                    font-size:18px;
+                }
+                .save {
+                    font-size: 32px;
+                }
+            }
+            .note-header {
+                margin-bottom: 0px !important;
+                .input-field {
+                    label {
+                        margin-top: 6px;
+                    }
+                }
+                .note-title {
+                    font-size: 25px !important;
+                    z-index: 50;
+                    color: $secondary-color;
+                    border-bottom: none !important;
+                    &:focus {
+                        border-bottom: none !important;
+                        box-shadow: 0 !important;
+                    }
+                }
+                .note-cats-wrapper {
+                    padding: 0px 30px;
+                    padding-top:5px;
+                    .note-cats {
+                        margin-top:2px !important;
+                        span {
+                            height: 27px;
+                            width: 27px;
+                            padding: auto auto;
+                            text-align: center;
+                            padding: 0px;
+                            border: 2px solid white;
+                            border-radius: 66%;
+                            &::before,
+                            &::after {
+                                display: none !important;
+                            }
+                        }
+                        input[type="radio"]:checked+span {
+                            border: 3px solid rgb(51, 51, 51);
+                        }
+                    }
+                }
+            }
+            .new {
+                padding: 50px;
+                color: dimgray;
+            }
+            .create-new {
+                height: 100%;
+
+                /*textarea {
+                    height: 100%;
+                    resize: none;
+                    line-height: 180% !important;
+                    border: none;
+                    font-size:120%;
+                    padding:10px;
+                    border-top: 2px solid $alternative;
+                }*/
+                #editor {
+                    height:auto !important;
+                    border: none !important;
+                }
+                select {
+                    display: inline-block;
+                }
+            }
+            ::placeholder {
+                opacity: 0.5;
+                /* Firefox */
+            }
+            i {
+                color: $secondary-color;
+                &:hover {
+                    cursor: pointer;
+                    color: $primary-color;
+                }
+            }
+
+            .more-email-options {
+                padding:10px 25px;
+                background: $alternative;
+            }
+            .show-info {
+                padding: 10px 25px;
+                background: $alternative;
+
+            }
+            .show-sharing {
+                padding: 10px 25px;
+                background: $alternative;
+                input, select {
+                    width:300px !important;
+                    margin:2px 10px;
+                }
+                input::placeholder {
+                    color:darkgray;
+                }
+            }
+        }
+    }
+}

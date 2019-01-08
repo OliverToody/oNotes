@@ -1,0 +1,20 @@
+body.main-page {
+
+
+.ecco {
+    min-height: 100vh;
+    text-align: center;
+    .signup,
+    .login {
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        width:400px;
+        margin:auto;
+        padding: 10px !important;
+    }
+    .login {
+        display: none;
+    }
+
+}
+}

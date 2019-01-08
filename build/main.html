@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edyssea</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<!--Import Google Icon Font-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+<body bg-color="#e4ba4e" class="main-page">
+<div class="container ecco">
+
+            <h1 class="blue-grey-text text-darken-1"><b>oNotes</b></h1>
+            <h6>Capture, organize, and share notes from anywhere. Your best ideas are always with you and always in sync.</h6>
+ <br>
+          <div class="signup">
+            <form action="api/register.php" method="post" name="register" autocomplete="off">
+              <h5>Sign up</h5>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <input id="nickname" type="text" class="validate" name="nickname">
+                   <label for="nickname">Nickname</label>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <input id="password" type="password" class="validate" name="password">
+                   <label for="password">Password</label>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s12">
+                   <input id="email" type="email" class="validate" name="email">
+                   <label for="email">Email</label>
+                 </div>
+               </div>
+               <input class="btn-large" type="submit" value="Sign in"/>
+             </form>
+              <p>Already have an account? <a href="#" class="loginbtn link">Log in</a></p>
+            </div>
+
+            <div class="login">
+              <form autocomplete="off" action="api/login.php" method="post" autocomplete="nope">
+                <h5>Login</h5>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="nickname" type="text" class="validate" name="nickname">
+            <label for="nickname">Nickname</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" class="validate" name="password">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <input class="btn-large" type="submit" value="Log in"/>
+      </form> 
+                  <p>Still no account? <a href="#"  class="signupbtn link">Sign up</a></p>
+              </div>
+        </div>
+      </div>
+
+</div>
+<script>
+$( ".loginbtn" ).click(function() {
+  $('.signup').hide();
+  $('.login').show();
+
+});
+
+$( ".signupbtn" ).click(function() {
+  $('.signup').show();
+  $('.login').hide();
+
+});
+</script>
+</body>
+</html>
