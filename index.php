@@ -30,10 +30,16 @@
 					<li><a href="about.html"><i class="fas fa-info-circle"></i></a></li>
 					<li><a href="settings.html"><i class="fas fa-user-alt"></i></a></li>
 					<li><a href="#" onclick="signOut();">Sign out</a></li>
-			 </ul>
+       </ul>
+          <ul class="sidenav" id="mobile-demo">
+          <li @click="newui"><a><i class="fas fa-plus"></i></a></li>
+					<li><a href="about.html"><i class="fas fa-info-circle"></i></a></li>
+					<li><a href="settings.html"><i class="fas fa-user-alt"></i></a></li>
+					<li><a href="#" onclick="signOut();">Sign out</a></li>
+        </ul>
 		</div>
  </nav>            <div class="row">
-               <div class="col m3">
+               <div class="col m3 s12">
                   <h5>Your notes</h5>
                   <div class="g-signin2" data-onsuccess="onSignIn" style="display:none;"></div>
 
@@ -42,6 +48,7 @@
                         <div class="col m8">
                            <span v-bind:class="note.note_category" class="note-cat"></span>
                            <h6><b>{{note.note_title}}</b></h6><br/>
+                           <p class="hide-on-med-and-up show-on-small">{{note.note}}</p>
                            <span class="date">{{note.updated}}</span>
                         </div>
                         <div class="col m4">
@@ -60,12 +67,11 @@
                            <div class="col m6">
                               <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode"></i>
                               <i class="fas fa-info-circle fa-lg" @click="showInfo"></i>
-                              <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
-                              <i class="fas fa-share-alt fa-lg" @click="showSharing"></i>
+                             <!-- <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
+                                <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>
+                              <i class="fas fa-share-alt fa-lg" @click="showSharing"></i>-->
                            <i class="fas fa-print fa-lg" @click="exportPDF"></i>
-                           <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>
                            <i class="fas fa-trash-alt delete fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
-
                            </div>
                            <div class="col m6 right-align">
                            
