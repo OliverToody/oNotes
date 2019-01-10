@@ -1,5 +1,4 @@
 
-
 document.getElementById("date").innerHTML = new Date().toISOString().slice(0,10);
 $('.datepicker').datepicker({
     format: "yyyy-mm-dd"
@@ -10,6 +9,9 @@ function signOut() {
     auth2.signOut().then(function () {
     });
     // Simulate a mouse click:
-window.location.href = "../onotes/api/destroy.php";
+window.location.href = "../oNotes/api/destroy.php";
     auth2.disconnect();
   }
+  
+  $('.sidenav').sidenav();
+

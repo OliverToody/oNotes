@@ -20,6 +20,14 @@ body {
         /***************************************/
         /* Note list                           */
         /***************************************/
+        .m3 {
+            padding:0px;
+        .filter-controls {
+            height:50px;
+            text-align: center;
+            line-height: 50px;
+
+        }
         .note_list {
             margin: 5px 10px 0px;
             border: 1px solid transparent;
@@ -56,6 +64,7 @@ body {
                 cursor: pointer;
             }
         }
+    }
         /***************************************/
         /* Working bech                        */
         /***************************************/
@@ -63,18 +72,19 @@ body {
             min-height: 80vh;
         }
         .working-bench {
-            margin: 20px;
+            margin: 0px;
             height: 80vh;
             .controls {
-                padding: 10px;
                 background: $alternative;
                 margin: 0px auto;
+                height:50px;
+                line-height: 50px;
                 i {
                     margin:auto 10px;
                     font-size:18px;
                 }
                 .save {
-                    font-size: 32px;
+                   text-align: right;
                 }
             }
             .note-header {
