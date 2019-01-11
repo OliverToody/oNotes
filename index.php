@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
    <head>
+   <?php 
+   session_start();
+
+   if(! isset($_SESSION['user_id'])) {
+      header('Location: main.html');
+   }
+   ?>
       <title>oNotes</title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
       <!-- Compiled and minified JavaScript -->
+      
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link rel="stylesheet" href="style/style.css">
@@ -25,56 +33,59 @@
          <nav>
 		<div class="nav-wrapper">
 			 <a href="index.php" class="brand-logo">oNotes</a>
-			 <ul id="nav-mobile" class="right hide-on-med-and-down">
+			 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
 					<li @click="newui"><a><i class="fas fa-plus"></i></a></li>
 					<li><a href="about.html"><i class="fas fa-info-circle"></i></a></li>
 					<li><a href="settings.html"><i class="fas fa-user-alt"></i></a></li>
 					<li><a href="#" onclick="signOut();">Sign out</a></li>
-       </ul>
+			 </ul>
           <ul class="sidenav" id="mobile-demo">
-          <li @click="newui"><a><i class="fas fa-plus"></i></a></li>
-					<li><a href="about.html"><i class="fas fa-info-circle"></i></a></li>
-					<li><a href="settings.html"><i class="fas fa-user-alt"></i></a></li>
+               <li @click="newui"><a>Add new note</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="settings.html">Settings</a></li>
 					<li><a href="#" onclick="signOut();">Sign out</a></li>
-        </ul>
+  </ul>
 		</div>
- </nav>            <div class="row">
-               <div class="col m3 s12">
-                  <h5>Your notes</h5>
+ </nav>      
+       <div class="row">
+               <div class="col m3 s12" v-show="show.show_listing">
+                  <div class="filter-controls">
+                     <p>Your notes</p>
+                </div>   
                   <div class="g-signin2" data-onsuccess="onSignIn" style="display:none;"></div>
 
                   <div class="note_list" v-for="note in get_notes">
                      <div class="row" @click="getNote(note.note_id)">
-                        <div class="col m8">
+                        <div class="col m12">
                            <span v-bind:class="note.note_category" class="note-cat"></span>
                            <h6><b>{{note.note_title}}</b></h6><br/>
-                           <p class="hide-on-med-and-up show-on-small">{{note.note}}</p>
+                           <p class="truncate">{{note.note}}</p>
                            <span class="date">{{note.updated}}</span>
                         </div>
-                        <div class="col m4">
+                       <!-- <div class="col m4">
                            <div class="action-buttons">
                                <i class="fas fa-share-alt fa-lg" v-if="note.share_id"></i>
                               <i class="fas fa-trash-alt" v-if="note.privilege_id==2 || note.privilege_id==null || note.owner_id == profile.user_id" @click="deleteNote(note.note_id)"></i>
                            </div>
-                        </div>
+                        </div>-->
                      </div>
                   </div>
                </div>
-               <div class="col m9">
+               <div class="col m9" style="padding:0px;">
                   <div class="working-bench">
                      <div class="create-new" v-show="show.edit_mode">
                         <div class="row controls">
-                           <div class="col m6">
-                              <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode"></i>
-                              <i class="fas fa-info-circle fa-lg" @click="showInfo"></i>
-                             <!-- <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
-                                <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>
-                              <i class="fas fa-share-alt fa-lg" @click="showSharing"></i>-->
+                           <div class="col m6 s10">
+                              <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
+                              <!--<i class="fas fa-info-circle fa-lg" @click="showInfo"></i>-->
+                              <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
+                              <i class="fas fa-share-alt fa-lg" @click="showSharing"></i>
                            <i class="fas fa-print fa-lg" @click="exportPDF"></i>
+                          <!-- <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>-->
                            <i class="fas fa-trash-alt delete fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
                            </div>
-                           <div class="col m6 right-align">
-                           
+                           <div class="col m6 s2 right-align">
                            <i class="fas fa-save save fa-lg" @click="sendNotes"></i>
                    
                            </div>
@@ -165,12 +176,6 @@
                </div>
                <textarea v-model="post.notePost.note" style="display:none;"></textarea>
                      </div>
-                     <div class="new_div center-align" v-show="!show.edit_mode">
-                     <div @click="newui" class="new center-align">
-                           <h1 id="date"></h1>
-                           <h4 id="time"></h4>
-                        </div>
-                     </div>
                   </div>
                </div>
             </div>
@@ -194,7 +199,7 @@
   [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
   [{ 'direction': 'rtl' }],                         // text direction
 
-  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  //[{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme

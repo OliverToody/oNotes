@@ -62,7 +62,8 @@ var one = new Vue({
 			more_email_options: false,
 			show_info: false,
 			show_sharing: false,
-			show_calendar: false
+			show_calendar: false,
+			show_listing: true
 		}
 				
 	},
@@ -152,6 +153,9 @@ var one = new Vue({
 		getNote: function(index) {
 			console.log(index);
 			one.show.edit_mode = true;
+			if(screen.width < 600) {
+				one.show.show_listing = false;
+			}
 			console.log(one.get_notes);
 			for (var i = 0; i < one.get_notes.length; i++) {
 				if(one.get_notes[i].note_id == index) {

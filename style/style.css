@@ -8087,60 +8087,69 @@ body .vue-app nav .brand-logo {
   margin-left: 10px;
   color: white !important;
 }
-body .vue-app .note_list {
+body .vue-app .m3 {
+  padding: 0px;
+}
+body .vue-app .m3 .filter-controls {
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+body .vue-app .m3 .note_list {
   margin: 5px 10px 0px;
   border: 1px solid transparent;
   border-bottom: 1px solid #e1e1e1;
 }
-body .vue-app .note_list .row {
+body .vue-app .m3 .note_list .row {
   margin-top: 8px !important;
   margin: 5px !important;
 }
-body .vue-app .note_list .row h6 {
+body .vue-app .m3 .note_list .row h6 {
   color: black;
   text-transform: justify;
   display: inline-block;
   margin: 7px 0px;
 }
-body .vue-app .note_list .row .action-buttons {
+body .vue-app .m3 .note_list .row .action-buttons {
   padding: 10px 10px;
   padding-right: 10px;
   text-align: right;
 }
-body .vue-app .note_list .row .action-buttons i {
+body .vue-app .m3 .note_list .row .action-buttons i {
   margin: 2px;
   color: gray;
 }
-body .vue-app .note_list .row .date {
+body .vue-app .m3 .note_list .row .date {
   color: dimgray;
 }
-body .vue-app .note_list .row .note-cat {
+body .vue-app .m3 .note_list .row .note-cat {
   display: inline-block;
   width: 15px;
   height: 15px;
   border-radius: 45px;
 }
-body .vue-app .note_list:hover {
+body .vue-app .m3 .note_list:hover {
   cursor: pointer;
 }
 body .vue-app .col.m9 {
   min-height: 80vh;
 }
 body .vue-app .working-bench {
-  margin: 20px;
+  margin: 0px;
   height: 80vh;
 }
 body .vue-app .working-bench .controls {
-  padding: 10px;
   background: #e1e1e1;
   margin: 0px auto;
+  height: 50px;
+  line-height: 50px;
 }
 body .vue-app .working-bench .controls i {
   margin: auto 10px;
   font-size: 18px;
 }
 body .vue-app .working-bench .controls .save {
-  font-size: 32px;
+  text-align: right;
 }
 body .vue-app .working-bench .note-header {
   margin-bottom: 0px !important;
