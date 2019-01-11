@@ -5,32 +5,62 @@
   <title>oNotes</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-    crossorigin="anonymous"> <!-- Compiled and minified JavaScript -->
+    crossorigin="anonymous" />
+  <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <!--Import Google Icon Font-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="materialize.min.css" media="screen,projection" />
 
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet" type="text/css" href="style/materialize.css" />
 
-  <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com">
+  <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com" />
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-
 </head>
-<body bg-color="#e4ba4e" class="main-page">
-  <div class="container" id="vue-login">
-<center>
-    <h1 class="text-darken-1">oNotes</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <h3>Capture, organize, and share notes from anywhere. Your best ideas are always with you and always in sync.</h3>
-  </center>
-</div>
-<script src="js/login.js"></script>
+
+<body class="main-page">
+  <div class="top-block">
+    <div class="container" id="vue-login">
+      <div class="row">
+        <div class="col m6 s12">
+          <h1 class="text-darken-1">SimplyNote</h1>
+          <h5>
+            Capture, organize, and share notes from anywhere. Your best ideas are
+            always with you.
+          </h5><br />
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+          <button class="btn">Sign in with Google</button>
+        </div>
+        <div class="col m6">
+          <img src="img/bg.jpg" class="img img-responsive">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col m4 s12 center-align">
+        <i class="fa fa-tablet-alt fa-3x"></i>
+      </div>
+      <div class="col m4 s12 center-align">
+        <i class="fa fa-calendar-alt fa-3x"></i>
+
+      </div>
+      <div class="col m4 s12 center-align">
+        <i class="fa fa-microphone fa-3x"></i>
+
+      </div>
+    </div>
+  </div>
+  <script src="js/login.js"></script>
 </body>
+
 </html>

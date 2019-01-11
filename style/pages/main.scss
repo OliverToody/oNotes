@@ -1,6 +1,15 @@
 body.main-page {
+ font-family: 'Raleway', sans-serif;
+.top-block {
+    margin-top:50px;
+    //background: url('../img/bg.jpg') no-repeat center center fixed;
+    background-size: auto auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+background-size: cover;
 
-
+}
 .ecco {
     min-height: 100vh;
     text-align: center;
@@ -17,4 +26,6 @@ body.main-page {
     }
 
 }
+
+
 }
