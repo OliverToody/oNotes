@@ -60,7 +60,7 @@
                         <div class="col m12">
                            <span v-bind:class="note.note_category" class="note-cat"></span>
                            <h6><b>{{note.note_title}}</b></h6><br/>
-                           <p class="truncate">{{note.note}}</p>
+                           <p class="truncate" v-html="note.note" style="font-size:12px !important;"> </p>
                            <span class="date">{{note.updated}}</span>
                         </div>
                        <!-- <div class="col m4">
@@ -77,16 +77,16 @@
                      <div class="create-new" v-show="show.edit_mode">
                         <div class="row controls">
                            <div class="col m6 s10">
-                              <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
+                              <i class="fas fa-arrow-left  btn" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
                               <!--<i class="fas fa-info-circle fa-lg" @click="showInfo"></i>-->
-                              <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
-                              <i class="fas fa-share-alt fa-lg" @click="showSharing"></i>
-                           <i class="fas fa-print fa-lg" @click="exportPDF"></i>
+                              <i class="fas fa-bell fa-lg  btn" @click="showCalendar"></i>
+                              <i class="fas fa-share-alt  btn fa-lg" @click="showSharing"></i>
+                           <i class="fas fa-print fa-lg  btn" @click="exportPDF"></i>
                           <!-- <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>-->
-                           <i class="fas fa-trash-alt delete fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
+                           <i class="fas fa-trash-alt delete  btn fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
                            </div>
                            <div class="col m6 s2 right-align">
-                           <i class="fas fa-save save fa-lg" @click="sendNotes"></i>
+                           <i class="fas fa-save save  btn fa-3x" @click="sendNotes"></i>
                    
                            </div>
                         </div>
@@ -139,7 +139,7 @@
                         <input type="hidden" v-model.lazy="post.notePost.note_id" />
                         <div class="row note-header">
                         <div class="col m6 s12 input-field">
-                        <label for="noteTitle">Note title</label>
+                        <label for="noteTitle" class="noteTitleLabel">Note title</label>
                         <input type="text" v-model.lazy="post.notePost.note_title" required="true" placeholder="Note title" name="noteTitle" class="note-title"/>
                         <span v-if="post.sharingInfo.privilege_name" @click="showInfo"><i>
                         <span v-if="post.sharingInfo.ownerName == profile.nickname">You shared this note</span>
@@ -149,8 +149,8 @@
                         <label>Select color category</label>
                         <p class="note-cats">
                         <label>
-                        <input name="blue" value="blue" v-model.lazy="post.notePost.note_category" type="radio" checked />
-                        <span class="blue"></span>
+                        <input name="indigo" value="indigo" v-model.lazy="post.notePost.note_category" type="radio" checked />
+                        <span class="indigo"></span>
                         </label>
                         <label>
                         <input name="orange"  value="orange" v-model.lazy="post.notePost.note_category" type="radio"  />
@@ -174,8 +174,13 @@
                   </div>
                   <div id="editor">
                </div>
+      
                <textarea v-model="post.notePost.note" style="display:none;"></textarea>
                      </div>
+                     <a id="scale-demo" @click="newui" href="#!" class="btn-floating btn-large scale-transition add-note">
+    <i class="material-icons white-text">add</i>
+  </a> 
+
                   </div>
                </div>
             </div>

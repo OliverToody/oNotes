@@ -1,31 +1,17 @@
 body.main-page {
- font-family: 'Raleway', sans-serif;
-.top-block {
-    margin-top:50px;
-    //background: url('../img/bg.jpg') no-repeat center center fixed;
-    background-size: auto auto;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-background-size: cover;
-
-}
-.ecco {
-    min-height: 100vh;
-    text-align: center;
-    .signup,
-    .login {
-        border: 1px solid lightgray;
-        border-radius: 5px;
-        width:400px;
-        margin:auto;
-        padding: 10px !important;
+    font-family: 'Raleway', sans-serif;
+    .top-block {
+        height: 85vh;
+        background: url('../img/bg2.png') no-repeat center center fixed;
+        background-size: auto auto;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        #vue-login {
+            .valign-wrapper {
+                min-height: 80vh;
+            }
+        }
     }
-    .login {
-        display: none;
-    }
-
-}
-
-
 }

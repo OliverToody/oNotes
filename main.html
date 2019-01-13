@@ -30,37 +30,71 @@
   <div class="top-block">
     <div class="container" id="vue-login">
       <div class="row">
-        <div class="col m6 s12">
-          <h1 class="text-darken-1">SimplyNote</h1>
-          <h5>
-            Capture, organize, and share notes from anywhere. Your best ideas are
-            always with you.
-          </h5><br />
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
-          <button class="btn">Sign in with Google</button>
+        <div class="col m7 s12">
+          <div class="valign-wrapper">
+              <div class="valign">
+            <h1 class="text-darken-1 bold-text">SimplyNote</h1>
+            <h5>
+              Capture, organize, and share notes from anywhere.<br/> Your best ideas are
+              always with you.
+            </h5><br />
+            <div class="g-signin2" id="my-signin2" data-onsuccess="onSignIn"></div>
+            <!--<button class="btn">Sign in with Google</button>-->
+          </div>
+          </div>
         </div>
-        <div class="col m6">
-          <img src="img/bg.jpg" class="img img-responsive">
+        <div class="col m1">
+
+        </div>
+        <div class="col m5">
+          <div class="valign-wrapper">
+            <img src="img/bg.jpg" class="responsive-img">
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <br><br>
   <div class="container">
     <div class="row">
       <div class="col m4 s12 center-align">
-        <i class="fa fa-tablet-alt fa-3x"></i>
+        <i class="fa fa-tablet-alt fa-5x blue-text darken-2"></i>
       </div>
       <div class="col m4 s12 center-align">
-        <i class="fa fa-calendar-alt fa-3x"></i>
+        <i class="fa fa-calendar-alt fa-5x blue-text darken-2"></i>
 
       </div>
       <div class="col m4 s12 center-align">
-        <i class="fa fa-microphone fa-3x"></i>
+        <i class="fa fa-microphone fa-5x blue-text darken-2"></i>
 
       </div>
     </div>
   </div>
   <script src="js/login.js"></script>
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+
+    function onFailure(error) {
+      console.log(error);
+    }
+
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 </body>
 
 </html>

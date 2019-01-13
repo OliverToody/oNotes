@@ -180,6 +180,8 @@ var one = new Vue({
 		},
 		deleteNote: function(index) {
 			one.show.edit_mode = false;
+			one.show_listing = true;
+
 			axios.delete('api/notes.php?note_id=' + index).then(function (response) {
 				console.log(response);
 				one.getNotes();

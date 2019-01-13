@@ -32,9 +32,23 @@ body {
             margin: 5px 10px 0px;
             border: 1px solid transparent;
             border-bottom: 1px solid $alternative;
+            background: rgb(245, 245, 245);
             .row {
                 margin-top: 8px !important;
-                margin: 5px !important;
+                margin:0px !important;
+                position: relative;
+
+                p {
+                    height:40px;
+                    margin:5px !important;
+                    width:85%;
+                    * {
+                        font-size:12px;
+                        line-height: 12px;
+                        margin:0px 1px;
+                        display: inline;
+                    }
+                }
                 h6 {
                     color: black;
                     text-transform: justify;
@@ -52,12 +66,15 @@ body {
                 }
                 .date {
                     color: dimgray;
+                    padding:5px;
                 }
                 .note-cat {
                     display: inline-block;
-                    width: 15px;
-                    height: 15px;
-                    border-radius: 45px;
+                    position: absolute;
+                    left:-5px;
+                    width: 10px;
+                    height: 100%;
+                    //border-radius: 45px;
                 }
             }
             &:hover {
@@ -75,16 +92,22 @@ body {
             margin: 0px;
             height: 80vh;
             .controls {
-                background: $alternative;
-                margin: 0px auto;
-                height:50px;
-                line-height: 50px;
+                //margin: 0px auto;;
+                padding: 10px 5px;
+                height: 57px;
+                line-height: 30px;
                 i {
-                    margin:auto 10px;
-                    font-size:18px;
+                    font-size: 18px;
+                    height: 35px;
+                    width: 35px;
+                    border-radius: 50%;
+                    color: indigo;
+                    padding: 2px;
+                    background-color: transparent;
+                    margin: auto 5px;
+                    line-height: 30px;
                 }
                 .save {
-                   text-align: right;
                 }
             }
             .note-header {
@@ -132,9 +155,16 @@ body {
                 padding: 50px;
                 color: dimgray;
             }
+
+            .add-note {
+                position: absolute;
+                bottom:27px;
+                right:27px;
+            }
             .create-new {
                 height: 100%;
-
+                
+                
                 /*textarea {
                     height: 100%;
                     resize: none;
@@ -146,7 +176,7 @@ body {
                 }*/
                 #editor {
                     height:auto !important;
-                    border: none !important;
+                   // border: none !important;
                 }
                 select {
                     display: inline-block;
@@ -185,5 +215,19 @@ body {
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .note-header {
+        .noteTitleLabel {
+            display: none;
+        }
+.note-title {
+    text-align: center;
+}
+.note-cats-wrapper {
+    text-align: center;
+}
     }
 }
