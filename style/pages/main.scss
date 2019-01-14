@@ -1,7 +1,7 @@
 body.main-page {
     font-family: 'Raleway', sans-serif;
     .top-block {
-        height: 85vh;
+        height: 100vh;
         background: url('../img/bg2.png') no-repeat center center fixed;
         background-size: auto auto;
         -webkit-background-size: cover;
@@ -10,8 +10,21 @@ body.main-page {
         background-size: cover;
         #vue-login {
             .valign-wrapper {
-                min-height: 80vh;
+                min-height: 100vh;
             }
         }
     }
+
+    .features {
+        .row {
+            min-height:50vh;
+            .col {
+                text-align: center;
+            }
+        }
+        img {
+            width:400px;
+        }
+    }
+
 }
