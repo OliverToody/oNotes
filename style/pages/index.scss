@@ -23,11 +23,18 @@ body {
         .m3 {
             padding:0px;
         .filter-controls {
-            height:50px;
+            margin-top:5px;
+            height:40px;
             text-align: center;
-            line-height: 50px;
-
+            font-weight: 900;
+            line-height: 40px;
+                select {
+                    height:30px;
+                    margin-top:5px;
+                    width:85%;
+                }
         }
+
         .note_list {
             margin: 5px 10px 0px;
             border: 1px solid transparent;
@@ -94,17 +101,17 @@ body {
             .controls {
                 //margin: 0px auto;;
                 padding: 10px 5px;
-                height: 57px;
+                height: 30px;
                 line-height: 30px;
                 i {
                     font-size: 18px;
                     height: 35px;
                     width: 35px;
-                    border-radius: 50%;
-                    color: indigo;
+                    border-radius: 5%;
+                    color: dimgray;
                     padding: 2px;
                     background-color: transparent;
-                    margin: auto 5px;
+                    margin: auto 0px;
                     line-height: 30px;
                 }
                 .save {
@@ -129,9 +136,9 @@ body {
                 }
                 .note-cats-wrapper {
                     padding: 0px 30px;
-                    padding-top:5px;
+                    padding-top:2px;
                     .note-cats {
-                        margin-top:2px !important;
+                        //margin-top:2px !important;
                         span {
                             height: 27px;
                             width: 27px;
@@ -157,7 +164,7 @@ body {
             }
 
             .add-note {
-                position: absolute;
+                position: fixed;
                 bottom:27px;
                 right:27px;
             }

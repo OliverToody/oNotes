@@ -64,8 +64,25 @@ var one = new Vue({
 			show_sharing: false,
 			show_calendar: false,
 			show_listing: true
-		}
+		},
+		filter_cat: "All"
 				
+	},
+	computed: {
+		get_filtered_notes : function() {
+			//var vm = this;
+			var category = this.filter_cat;
+			console.log(category);
+			if(category === "All") {
+				return this.get_notes;
+			} else {
+				return this.get_notes.filter(function(note) {
+					return note.note_category === category;
+				});
+			}
+		
+		//return this.get_notes;
+	}
 	},
 	mounted: function(){
 		this.getNotes();
@@ -90,6 +107,8 @@ var one = new Vue({
 			one.post.notePost.note_id = "";
 			one.post.notePost.updated = new Date();
 			one.post.notePost.created = new Date();
+			one.show.show_listing = false;
+
 			$('.ql-toolbar').show();
 			$('input.note-title').prop('disabled', false);
 			$('.fa-save,.controls  .fa-share-alt, .note-cats-wrapper, .delete').show();

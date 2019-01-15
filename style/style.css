@@ -5564,7 +5564,7 @@ select:focus {
 
 button:focus {
   outline: none;
-  background-color: #3e50ba;
+  background-color: #3949ab, 4%;
 }
 
 label {
@@ -8052,7 +8052,7 @@ body.main-page {
   font-family: "Raleway", sans-serif;
 }
 body.main-page .top-block {
-  height: 85vh;
+  height: 100vh;
   background: url("../img/bg2.png") no-repeat center center fixed;
   background-size: auto auto;
   -webkit-background-size: cover;
@@ -8061,7 +8061,16 @@ body.main-page .top-block {
   background-size: cover;
 }
 body.main-page .top-block #vue-login .valign-wrapper {
-  min-height: 80vh;
+  min-height: 100vh;
+}
+body.main-page .features .row {
+  min-height: 50vh;
+}
+body.main-page .features .row .col {
+  text-align: center;
+}
+body.main-page .features img {
+  width: 400px;
 }
 
 body {
@@ -8091,9 +8100,16 @@ body .vue-app .m3 {
   padding: 0px;
 }
 body .vue-app .m3 .filter-controls {
-  height: 50px;
+  margin-top: 5px;
+  height: 40px;
   text-align: center;
-  line-height: 50px;
+  font-weight: 900;
+  line-height: 40px;
+}
+body .vue-app .m3 .filter-controls select {
+  height: 30px;
+  margin-top: 5px;
+  width: 85%;
 }
 body .vue-app .m3 .note_list {
   margin: 5px 10px 0px;
@@ -8155,18 +8171,18 @@ body .vue-app .working-bench {
 }
 body .vue-app .working-bench .controls {
   padding: 10px 5px;
-  height: 57px;
+  height: 30px;
   line-height: 30px;
 }
 body .vue-app .working-bench .controls i {
   font-size: 18px;
   height: 35px;
   width: 35px;
-  border-radius: 50%;
-  color: indigo;
+  border-radius: 5%;
+  color: dimgray;
   padding: 2px;
   background-color: transparent;
-  margin: auto 5px;
+  margin: auto 0px;
   line-height: 30px;
 }
 body .vue-app .working-bench .note-header {
@@ -8187,10 +8203,7 @@ body .vue-app .working-bench .note-header .note-title:focus {
 }
 body .vue-app .working-bench .note-header .note-cats-wrapper {
   padding: 0px 30px;
-  padding-top: 5px;
-}
-body .vue-app .working-bench .note-header .note-cats-wrapper .note-cats {
-  margin-top: 2px !important;
+  padding-top: 2px;
 }
 body .vue-app .working-bench .note-header .note-cats-wrapper .note-cats span {
   height: 27px;
@@ -8212,7 +8225,7 @@ body .vue-app .working-bench .new {
   color: dimgray;
 }
 body .vue-app .working-bench .add-note {
-  position: absolute;
+  position: fixed;
   bottom: 27px;
   right: 27px;
 }

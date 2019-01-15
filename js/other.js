@@ -12,6 +12,6 @@ function signOut() {
 window.location.href = "../oNotes/api/destroy.php";
     auth2.disconnect();
   }
-  
+  $('select').formSelect();
   $('.sidenav').sidenav();
 

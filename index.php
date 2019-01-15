@@ -30,6 +30,7 @@
    <body bg-color="#e4ba4e">
       <div id="vue-app-one" class="vue-app">
          <div class="container-fluid">
+            <div class="navbar-fixed">
          <nav>
 		<div class="nav-wrapper">
 			 <a href="index.php" class="brand-logo">oNotes</a>
@@ -47,15 +48,27 @@
 					<li><a href="#" onclick="signOut();">Sign out</a></li>
   </ul>
 		</div>
- </nav>      
+ </nav>   
+</div>   
        <div class="row">
                <div class="col m3 s12" v-show="show.show_listing">
-                  <div class="filter-controls">
-                     <p>Your notes</p>
+               <div class="row filter-controls">
+                  <div class="col m4 s4">
+                  <span>Filter notes</span> 
+                </div>
+                  <div class="col m8 s8">
+                  <select v-model="filter_cat"  class="browser-default">
+                     <option value="All">All notes</option>
+                     <option value="blue">Blue</option>
+                     <option value="orange">Orange</option>
+                     <option value="pink">Pink</option>
+                     <option value="green">Green</option>
+                     <option value="brown">Brown</option>
+            </select>
+               </div>
                 </div>   
-                  <div class="g-signin2" data-onsuccess="onSignIn" style="display:none;"></div>
 
-                  <div class="note_list" v-for="note in get_notes">
+                  <div class="note_list" v-for="note in get_filtered_notes">
                      <div class="row" @click="getNote(note.note_id)">
                         <div class="col m12">
                            <span v-bind:class="note.note_category" class="note-cat"></span>
@@ -77,7 +90,7 @@
                      <div class="create-new" v-show="show.edit_mode">
                         <div class="row controls">
                            <div class="col m6 s10">
-                              <i class="fas fa-arrow-left  btn" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
+                              <i class="fas fa-arrow-left btn" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
                               <!--<i class="fas fa-info-circle fa-lg" @click="showInfo"></i>-->
                               <i class="fas fa-bell fa-lg  btn" @click="showCalendar"></i>
                               <i class="fas fa-share-alt  btn fa-lg" @click="showSharing"></i>
@@ -146,7 +159,7 @@
                          <span v-if="post.sharingInfo.ownerName != profile.nickname">Shared note by {{post.sharingInfo.ownerName}}</span></i></span>
                         </div>
                         <div class="col m6 s12 right-align note-cats-wrapper">
-                        <label>Select color category</label>
+                        <label v-show="show.show_listing">Select color category</label>
                         <p class="note-cats">
                         <label>
                         <input name="indigo" value="indigo" v-model.lazy="post.notePost.note_category" type="radio" checked />
