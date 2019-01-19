@@ -120,6 +120,7 @@ var one = new Vue({
 			console.log(one.post.notePost.deadline);
 			one.post.notePost.deadline = one.post.notePost.deadline + " 00:00:00";
 			one.show.edit_mode = false;
+			one.show.show_listing = true;
 			one.post.notePost.note = $('.ql-editor').html();
 			if(one.post.notePost.note_id == "") {
 			axios.post('api/notes.php', JSON.stringify(this.post)
@@ -199,10 +200,9 @@ var one = new Vue({
 		},
 		deleteNote: function(index) {
 			one.show.edit_mode = false;
-			one.show_listing = true;
+			one.show.show_listing = true;
 
 			axios.delete('api/notes.php?note_id=' + index).then(function (response) {
-				console.log(response);
 				one.getNotes();
 				one.show.edit_mode = false;
 
@@ -222,7 +222,6 @@ var one = new Vue({
 
 			axios.post('api/email.php', JSON.stringify(this.email)
 			  ).then(function (response) {
-				console.log(response);
 			  }).catch(function (error) {
 				console.log(error);
 				});

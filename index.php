@@ -3,12 +3,18 @@
    <head>
    <?php 
    session_start();
-
    if(! isset($_SESSION['user_id'])) {
       header('Location: main.html');
    }
    ?>
-      <title>oNotes</title>
+      <title>SimplyNote</title>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <meta name="theme-color" content="#3367d6"/>
+    <link rel="shortcut icon" href="img/notepad.png" type="image/x-icon" />
+   <meta name="description" content="Free Note Taking App!">
+    <link rel="manifest" href="manifest.json">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -25,7 +31,21 @@
       
       <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-
+<script>
+//This is the "Offline page" service worker
+/*
+//Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
+if (navigator.serviceWorker.controller) {
+  console.log('[PWA Builder] active service worker found, no need to register')
+} else {
+  //Register the ServiceWorker
+  navigator.serviceWorker.register('pwabuider-sw.js', {
+    scope: './'
+  }).then(function(reg) {
+    console.log('Service worker has been registered for scope:'+ reg.scope);
+  });
+}*/
+</script>
                </head>
    <body bg-color="#e4ba4e">
       <div id="vue-app-one" class="vue-app">
@@ -33,19 +53,22 @@
             <div class="navbar-fixed">
          <nav>
 		<div class="nav-wrapper">
-			 <a href="index.php" class="brand-logo">oNotes</a>
+			 <a href="index.php" class="brand-logo"><b>SimplyNote</b></a>
 			 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
 					<li @click="newui"><a><i class="fas fa-plus"></i></a></li>
-					<li><a href="about.html"><i class="fas fa-info-circle"></i></a></li>
-					<li><a href="settings.html"><i class="fas fa-user-alt"></i></a></li>
+					<li><a href=""><i class="fas fa-info-circle"></i></a></li>
+					<li><a href=""><i class="fas fa-user-alt"></i></a></li>
+					<li><a href="" onclick="mobileInfo()"><i class="fas fa-mobile-alt"></i></a></li>
 					<li><a href="#" onclick="signOut();">Sign out</a></li>
 			 </ul>
           <ul class="sidenav" id="mobile-demo">
+               <li class="black-text center-align"><b>SimplyNote 2019</b></li>
                <li @click="newui"><a>Add new note</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="settings.html">Settings</a></li>
-					<li><a href="#" onclick="signOut();">Sign out</a></li>
+               <li><a href="">Settings</a></li>
+               <li><a href="">SimplyNote for Mobile</a></li>
+               <li><a href="">About</a></li>
+					<li><a href="api/destroy.php" onclick="signOut()">Sign out</a></li>
   </ul>
 		</div>
  </nav>   
@@ -73,7 +96,7 @@
                         <div class="col m12">
                            <span v-bind:class="note.note_category" class="note-cat"></span>
                            <h6><b>{{note.note_title}}</b></h6><br/>
-                           <p class="truncate" v-html="note.note" style="font-size:12px !important;"> </p>
+                           <p class="truncat" v-html="note.note" style="font-size:12px !important; max-width:80%;"> </p>
                            <span class="date">{{note.updated}}</span>
                         </div>
                        <!-- <div class="col m4">
@@ -88,18 +111,18 @@
                <div class="col m9" style="padding:0px;">
                   <div class="working-bench">
                      <div class="create-new" v-show="show.edit_mode">
-                        <div class="row controls">
+                        <div class="row controls" >
                            <div class="col m6 s10">
-                              <i class="fas fa-arrow-left btn" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
+                              <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
                               <!--<i class="fas fa-info-circle fa-lg" @click="showInfo"></i>-->
-                              <i class="fas fa-bell fa-lg  btn" @click="showCalendar"></i>
-                              <i class="fas fa-share-alt  btn fa-lg" @click="showSharing"></i>
-                           <i class="fas fa-print fa-lg  btn" @click="exportPDF"></i>
+                              <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
+                              <i class="fas fa-share-alt  fa-lg" @click="showSharing"></i>
+                           <i class="fas fa-print fa-lg " @click="exportPDF"></i>
                           <!-- <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>-->
-                           <i class="fas fa-trash-alt delete  btn fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
+                           <i class="fas fa-trash-alt delete  fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
                            </div>
                            <div class="col m6 s2 right-align">
-                           <i class="fas fa-save save  btn fa-3x" @click="sendNotes"></i>
+                           <i class="fas fa-save save  fa-3x" @click="sendNotes"></i>
                    
                            </div>
                         </div>

@@ -1,7 +1,16 @@
 $alternative: rgb(225, 225, 225);
+html {
+    overflow-x: hidden !important;
+ 
+}
 body {
     font-family: 'Raleway', sans-serif;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    //overflow-y: hidden;
+    overscroll-behavior: contain;
+    .sidenav-overlay {
+        z-index:2 !important;
+    }
     .vue-app {
         /***************************************/
         /* Navigation                          */
@@ -16,6 +25,10 @@ body {
                 color: white !important;
 
             }
+            .sidenav {
+                z-index: 100;
+            }
+            
         }
         /***************************************/
         /* Note list                           */
@@ -23,20 +36,20 @@ body {
         .m3 {
             padding:0px;
         .filter-controls {
-            margin-top:5px;
-            height:40px;
+            margin:0px 15px 10px 0px;
+            height:50px;
             text-align: center;
             font-weight: 900;
-            line-height: 40px;
+            line-height: 50px;
                 select {
-                    height:30px;
+                    height:40px;
                     margin-top:5px;
                     width:85%;
                 }
         }
 
         .note_list {
-            margin: 5px 10px 0px;
+            margin: 5px 5px 0px;
             border: 1px solid transparent;
             border-bottom: 1px solid $alternative;
             background: rgb(245, 245, 245);
@@ -45,10 +58,11 @@ body {
                 margin:0px !important;
                 position: relative;
 
-                p {
+                p.truncat {
                     height:40px;
                     margin:5px !important;
-                    width:85%;
+                    width:90%;
+                    overflow: hidden;
                     * {
                         font-size:12px;
                         line-height: 12px;
@@ -100,18 +114,20 @@ body {
             height: 80vh;
             .controls {
                 //margin: 0px auto;;
-                padding: 10px 5px;
-                height: 30px;
+                padding: 5px 5px;
+                background:white;
+                z-index: 200;
+                height: 50px;
                 line-height: 30px;
                 i {
-                    font-size: 18px;
-                    height: 35px;
-                    width: 35px;
+                    font-size: 21px;
+                    height: 40px;
+                    width: 40px;
                     border-radius: 5%;
-                    color: dimgray;
+                    color: #3367d6;
                     padding: 2px;
                     background-color: transparent;
-                    margin: auto 0px;
+                    margin-left: 3px;
                     line-height: 30px;
                 }
                 .save {
@@ -119,6 +135,7 @@ body {
             }
             .note-header {
                 margin-bottom: 0px !important;
+                margin-top:50px;
                 .input-field {
                     label {
                         margin-top: 6px;
@@ -182,8 +199,8 @@ body {
                     border-top: 2px solid $alternative;
                 }*/
                 #editor {
-                    height:auto !important;
-                   // border: none !important;
+                    min-height:400px !important;
+                    border: none !important;
                 }
                 select {
                     display: inline-block;
@@ -233,8 +250,18 @@ body {
 .note-title {
     text-align: center;
 }
+
+.note-cats {
+    margin-top:-10px;
+}
 .note-cats-wrapper {
     text-align: center;
 }
+    }
+
+    .ql-toolbar {
+        height: 37px;
+        overflow: hidden;
+        border:none;
     }
 }

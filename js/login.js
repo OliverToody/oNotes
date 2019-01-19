@@ -1,4 +1,5 @@
 function onSignIn(googleUser) {
+	console.log("here");
 	// Useful data for your client-side scripts:
 	var profile = googleUser.getBasicProfile();
 	console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -19,10 +20,11 @@ function onSignIn(googleUser) {
 		$response = JSON.parse(xhr.responseText);
 		if($response['redirect'] == 'yes') {
 			window.location.href = "index.php";
+			console.log('v pod');
 			console.log(xhr.responseText);
 
 		}
-		console.log(xhr.responseText);
+		console.log("TU:" + xhr.responseText);
 	};
 	xhr.send('idtoken=' + id_token + '&google_username=' + profile.getGivenName() + '&google_email=' + profile.getEmail());
 	//xhr.send('google_username=' + profile.getGivenName());
