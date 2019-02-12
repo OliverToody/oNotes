@@ -98,7 +98,15 @@ var one = new Vue({
 			}
 		}
 	},
+	created () {
+		document.addEventListener("backbutton", this.clearWorkbench, false);
+	},
 	methods: {
+		clearWorkbench: function() {
+			this.show.edit_mode = false;
+			this.show.show_listing = true;
+
+		},
 		newui: function() {
 			this.show.edit_mode = ! this.show.edit_mode;
 			one.post.notePost.note = "";
@@ -107,8 +115,9 @@ var one = new Vue({
 			one.post.notePost.note_id = "";
 			one.post.notePost.updated = new Date();
 			one.post.notePost.created = new Date();
-			one.show.show_listing = false;
-
+			if(screen.width < 600) {
+				one.show.show_listing = false;
+			}
 			$('.ql-toolbar').show();
 			$('input.note-title').prop('disabled', false);
 			$('.fa-save,.controls  .fa-share-alt, .note-cats-wrapper, .delete').show();

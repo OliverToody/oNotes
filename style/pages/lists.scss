@@ -1,0 +1,270 @@
+$alternative: rgb(225, 225, 225);
+html {
+    overflow-x: hidden !important;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden !important; //overflow-y: hidden;
+    overscroll-behavior: contain;
+    img {
+        height:15px;
+        width:80px;
+        padding:0px;
+        margin:0px;
+    }
+    .tp-color {
+        color: #3367d6;
+    }
+    .sidenav-overlay {
+        z-index: 2 !important;
+    }
+    .vue-app-2 {
+        /***************************************/
+        /* Navigation                          */
+        /***************************************/
+
+        .working-bench {
+            min-height:90vh;
+            border-right: 1px solid lightgray;
+            border-left: 1px solid lightgray;
+            .controls {
+                margin: 0px auto;;
+                padding: 10px 5px;
+                margin-bottom:5px !important;
+                height:50px;
+                z-index: 200;
+                height: 50px;
+                line-height: 30px;
+                i {
+                    font-size: 20px;
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 5%;
+                    color: #3367d6;
+                    padding: 2px;
+                    background-color: transparent;
+                    margin-left: 3px;
+                    line-height: 30px;
+                }
+                .save {
+                    float:right;
+                }
+            }
+            .wItems {
+                padding: 0px 20px;
+
+                .header {
+                    padding:5px;
+                }
+                .listWItem {
+                    margin:5px auto;
+                    padding:10px;
+                    text-align:left;
+                    border-bottom:1px solid lightgray;
+                    display: block;
+                }
+
+                .list-title {
+                    font-weight: bold;
+                    font-size: 30px;
+                    border-bottom: 0px;
+                    display: block;
+                }
+                .note-cats-wrapper {
+                    padding: 0px 30px;
+                    .note-cats {
+                        //margin-top:2px !important;
+                        span {
+                            height: 27px;
+                            width: 27px;
+                            padding: auto auto;
+                            text-align: center;
+                            padding: 0px;
+                            border: 2px solid white;
+                            border-radius: 66%;
+                            &::before,
+                            &::after {
+                                display: none !important;
+                            }
+                        }
+                        input[type="radio"]:checked+span {
+                            border: 3px solid rgb(51, 51, 51);
+                        }
+                    }
+                }
+            }
+            .addWItem {
+                button {
+                    margin:3px;
+                    border:1px solid lightgray;
+                    color:lightgray;
+                }
+            }
+        }
+        .m2 {
+            padding: 0px;
+        }
+        .oneList {
+            margin: 5px 5px 0px;
+            border: 1px solid transparent;
+            border-bottom: 1px solid $alternative;
+            background: rgb(245, 245, 245);
+            position: relative;
+            padding: 0px 20px;
+            i {
+               color:lightgray;
+            }
+            .list-cat {
+                display: inline-block;
+                    position: absolute;
+                    left:-5px;
+                    width: 10px;
+                    height: 100%;
+            }
+            .list-name {
+                font-weight: 500;
+                text-align: center;
+                display:inline-block;
+                padding: 0px 10px;
+            }
+            
+        }
+        .add-list {
+            position: fixed;
+            bottom:27px;
+            right:27px;
+        }
+
+        .common-items {
+            padding:5px 30px;
+            border-bottom: 1px solid lightgray;
+        .listItems {
+            .add-item-button {
+                border: 1px solid lightgray;
+                padding:10px 18px;
+                &:focus {
+                    background-color: transparent !important;
+                    outline: 1px solid lightgray;
+                }
+            }
+           
+            .greenItems {
+               // border-left:10px solid #4CAF50;
+                margin:10px 5px;
+                .listItem {
+                    border:1px solid #4CAF50;
+                }
+            }
+            .blueItems {
+               // border-left:10px solid blue;
+                margin:10px 5px;
+                .listItem {
+                    border:1px solid blue;
+                }
+            }
+            .pinkItems {
+                //border-left:10px solid #E91E63;
+                margin:10px 5px;
+                .listItem {
+                    border:1px solid #E91E63;
+                }
+            }
+            .orangeItems {
+               // border-left:10px solid orange;
+                margin:10px 5px;
+                .listItem {
+                    border:1px solid orange;
+                }
+            }
+            .listItem {
+                border:1px solid lightgray;
+                border-radius: 5px;
+                width: 46%;
+                font-size: 16px;
+                font-weight:700;
+                display: inline-block;
+                cursor: pointer;
+                margin:5px;
+                .itemname {
+                    padding:5px 10px;
+                    display:inline-block;
+
+                }
+                i {
+                    padding:10px;
+                    float:right;
+                }
+            }
+
+        }
+
+    }
+        .note-cats-wrapper {
+            padding: 0px 30px;
+            padding-top: 2px;
+            text-align: center;
+            select {
+                margin: auto;
+            }
+            .note-cats {
+                //margin-top:2px !important;
+                span {
+                    height: 27px;
+                    width: 27px;
+                    padding: auto auto;
+                    text-align: center;
+                    padding: 0px;
+                    border: 2px solid white;
+                    border-radius: 66%;
+                    &::before,
+                    &::after {
+                        display: none !important;
+                    }
+                }
+                input[type="radio"]:checked+span {
+                    border: 3px solid rgb(51, 51, 51);
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .controls {
+            //display: none;
+        }
+        .working-bench {
+            border: none !important;
+        }
+        .cat-span {
+            width: 100%;
+            z-index: 10;
+            height:5px;
+            display:block;
+            position: fixed;
+            top: 0;
+        }
+    
+        .header {
+            margin-bottom:0px !important;
+    .list-title {
+            font-size:20px !important;
+
+        }
+      
+    
+    .note-cats-wrapper {
+        text-align: right;
+        .note-cats {
+            padding: 0px 5px;
+            span {
+                height:25px !important;
+                width: 25px !important;
+            }
+        }
+
+    }
+        }
+    
+    }
+}

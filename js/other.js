@@ -16,3 +16,12 @@ window.location.href = "../oNotes/api/destroy.php";
             $('.sidenav').sidenav('close');
         });
 
+        $(".dropdown-trigger").dropdown();
+
+      /* function clearWorkbench() {
+            return "You are asshole";
+       }*/
+    //window.onbeforeunload = function() { return "Your work will be lost."; };
+    //document.addEventListener("backbutton", clearWorkbench(), false);
+
+

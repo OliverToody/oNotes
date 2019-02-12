@@ -8051,26 +8051,65 @@ input[type=range].focused:focus:not(.active)::-ms-thumb {
 body.main-page {
   font-family: "Raleway", sans-serif;
 }
+body.main-page .t-primary {
+  color: #3367d6;
+}
+body.main-page .valign {
+  margin: auto;
+  text-align: center;
+}
 body.main-page .top-block {
-  height: 100vh;
-  background: url("../img/bg2.png") no-repeat center center fixed;
+  height: 80vh;
   background-size: auto auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+body.main-page .top-block .title {
+  color: #3367d6;
+}
 body.main-page .top-block #vue-login .valign-wrapper {
   min-height: 100vh;
 }
-body.main-page .features .row {
-  min-height: 50vh;
+body.main-page .features {
+  margin-top: 50px;
 }
 body.main-page .features .row .col {
-  text-align: center;
+  padding: 10px;
 }
-body.main-page .features img {
-  width: 400px;
+body.main-page .features .row .col h2 {
+  font-size: 25px;
+}
+body.main-page .preview-div {
+  padding: 30px;
+  background: rgba(2, 2, 173, 0.795);
+}
+body.main-page .preview-div h2 {
+  color: white;
+  font-weight: 900;
+}
+body.main-page .preview-div .myButton {
+  background-color: transparent;
+  border: 4px solid #ffffff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 16px 31px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+}
+body.main-page .preview-div .myButton:hover {
+  background-color: transparent;
+}
+body.main-page .preview-div .myButton:active {
+  position: relative;
+  top: 1px;
+}
+body.main-page footer {
+  margin-top: 50px;
 }
 
 html {
@@ -8085,27 +8124,27 @@ body {
 body .sidenav-overlay {
   z-index: 2 !important;
 }
+body nav .fas {
+  font-size: 17px !important;
+  color: white !important;
+}
+body nav .brand-logo {
+  margin-left: 10px;
+  color: white !important;
+}
+body nav .sidenav {
+  z-index: 100;
+}
+body nav .dropdown-trigger {
+  display: none;
+}
 body .vue-app {
-  /***************************************/
-  /* Navigation                          */
-  /***************************************/
   /***************************************/
   /* Note list                           */
   /***************************************/
   /***************************************/
   /* Working bech                        */
   /***************************************/
-}
-body .vue-app nav .fas {
-  font-size: 17px !important;
-  color: white !important;
-}
-body .vue-app nav .brand-logo {
-  margin-left: 10px;
-  color: white !important;
-}
-body .vue-app nav .sidenav {
-  z-index: 100;
 }
 body .vue-app .m3 {
   padding: 0px;
@@ -8179,10 +8218,10 @@ body .vue-app .col.m9 {
 }
 body .vue-app .working-bench {
   margin: 0px;
-  height: 80vh;
 }
 body .vue-app .working-bench .controls {
-  padding: 5px 5px;
+  padding: 5px 25px 5px 9px;
+  margin-bottom: 5px !important;
   background: white;
   z-index: 200;
   height: 50px;
@@ -8201,7 +8240,6 @@ body .vue-app .working-bench .controls i {
 }
 body .vue-app .working-bench .note-header {
   margin-bottom: 0px !important;
-  margin-top: 50px;
 }
 body .vue-app .working-bench .note-header .input-field label {
   margin-top: 6px;
@@ -8257,8 +8295,9 @@ body .vue-app .working-bench .create-new {
   }*/
 }
 body .vue-app .working-bench .create-new #editor {
-  min-height: 400px !important;
+  min-height: 200px !important;
   border: none !important;
+  height: auto;
 }
 body .vue-app .working-bench .create-new select {
   display: inline-block;
@@ -8295,23 +8334,284 @@ body .vue-app .working-bench .show-sharing input::placeholder {
 }
 
 @media only screen and (max-width: 600px) {
-  .note-header .noteTitleLabel {
-    display: none;
+  .dropdown-cat li label {
+    font-size: 16px;
+    color: #3367d6;
+    display: block;
+    line-height: 22px;
+    padding: 10px;
   }
-  .note-header .note-title {
-    text-align: center;
+
+  .controls {
+    padding: 10px !important;
   }
-  .note-header .note-cats {
-    margin-top: -10px;
+
+  .cat-span {
+    width: 100%;
+    height: 5px;
+    display: block;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+  }
+
+  nav .dropdown-trigger {
+    display: inline-block !important;
+    padding: 0px 20px;
+  }
+  .note-header {
+    padding: 0px 10px;
   }
   .note-header .note-cats-wrapper {
     text-align: center;
+  }
+  .note-header .note-cats-wrapper .note-cats span {
+    height: 20px !important;
+    width: 20px !important;
   }
 
   .ql-toolbar {
     height: 37px;
     overflow: hidden;
     border: none;
+  }
+
+  .noteTitleLabel {
+    display: none;
+  }
+}
+html {
+  overflow-x: hidden !important;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain;
+}
+body img {
+  height: 15px;
+  width: 80px;
+  padding: 0px;
+  margin: 0px;
+}
+body .tp-color {
+  color: #3367d6;
+}
+body .sidenav-overlay {
+  z-index: 2 !important;
+}
+body .vue-app-2 {
+  /***************************************/
+  /* Navigation                          */
+  /***************************************/
+}
+body .vue-app-2 .working-bench {
+  min-height: 90vh;
+  border-right: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+}
+body .vue-app-2 .working-bench .controls {
+  margin: 0px auto;
+  padding: 10px 5px;
+  margin-bottom: 5px !important;
+  height: 50px;
+  z-index: 200;
+  height: 50px;
+  line-height: 30px;
+}
+body .vue-app-2 .working-bench .controls i {
+  font-size: 20px;
+  height: 40px;
+  width: 40px;
+  border-radius: 5%;
+  color: #3367d6;
+  padding: 2px;
+  background-color: transparent;
+  margin-left: 3px;
+  line-height: 30px;
+}
+body .vue-app-2 .working-bench .controls .save {
+  float: right;
+}
+body .vue-app-2 .working-bench .wItems {
+  padding: 0px 20px;
+}
+body .vue-app-2 .working-bench .wItems .header {
+  padding: 5px;
+}
+body .vue-app-2 .working-bench .wItems .listWItem {
+  margin: 5px auto;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid lightgray;
+  display: block;
+}
+body .vue-app-2 .working-bench .wItems .list-title {
+  font-weight: bold;
+  font-size: 30px;
+  border-bottom: 0px;
+  display: block;
+}
+body .vue-app-2 .working-bench .wItems .note-cats-wrapper {
+  padding: 0px 30px;
+}
+body .vue-app-2 .working-bench .wItems .note-cats-wrapper .note-cats span {
+  height: 27px;
+  width: 27px;
+  padding: auto auto;
+  text-align: center;
+  padding: 0px;
+  border: 2px solid white;
+  border-radius: 66%;
+}
+body .vue-app-2 .working-bench .wItems .note-cats-wrapper .note-cats span::before, body .vue-app-2 .working-bench .wItems .note-cats-wrapper .note-cats span::after {
+  display: none !important;
+}
+body .vue-app-2 .working-bench .wItems .note-cats-wrapper .note-cats input[type=radio]:checked + span {
+  border: 3px solid #333333;
+}
+body .vue-app-2 .working-bench .addWItem button {
+  margin: 3px;
+  border: 1px solid lightgray;
+  color: lightgray;
+}
+body .vue-app-2 .m2 {
+  padding: 0px;
+}
+body .vue-app-2 .oneList {
+  margin: 5px 5px 0px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #e1e1e1;
+  background: whitesmoke;
+  position: relative;
+  padding: 0px 20px;
+}
+body .vue-app-2 .oneList i {
+  color: lightgray;
+}
+body .vue-app-2 .oneList .list-cat {
+  display: inline-block;
+  position: absolute;
+  left: -5px;
+  width: 10px;
+  height: 100%;
+}
+body .vue-app-2 .oneList .list-name {
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+  padding: 0px 10px;
+}
+body .vue-app-2 .add-list {
+  position: fixed;
+  bottom: 27px;
+  right: 27px;
+}
+body .vue-app-2 .common-items {
+  padding: 5px 30px;
+  border-bottom: 1px solid lightgray;
+}
+body .vue-app-2 .common-items .listItems .add-item-button {
+  border: 1px solid lightgray;
+  padding: 10px 18px;
+}
+body .vue-app-2 .common-items .listItems .add-item-button:focus {
+  background-color: transparent !important;
+  outline: 1px solid lightgray;
+}
+body .vue-app-2 .common-items .listItems .greenItems {
+  margin: 10px 5px;
+}
+body .vue-app-2 .common-items .listItems .greenItems .listItem {
+  border: 1px solid #4CAF50;
+}
+body .vue-app-2 .common-items .listItems .blueItems {
+  margin: 10px 5px;
+}
+body .vue-app-2 .common-items .listItems .blueItems .listItem {
+  border: 1px solid blue;
+}
+body .vue-app-2 .common-items .listItems .pinkItems {
+  margin: 10px 5px;
+}
+body .vue-app-2 .common-items .listItems .pinkItems .listItem {
+  border: 1px solid #E91E63;
+}
+body .vue-app-2 .common-items .listItems .orangeItems {
+  margin: 10px 5px;
+}
+body .vue-app-2 .common-items .listItems .orangeItems .listItem {
+  border: 1px solid orange;
+}
+body .vue-app-2 .common-items .listItems .listItem {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  width: 46%;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-block;
+  cursor: pointer;
+  margin: 5px;
+}
+body .vue-app-2 .common-items .listItems .listItem .itemname {
+  padding: 5px 10px;
+  display: inline-block;
+}
+body .vue-app-2 .common-items .listItems .listItem i {
+  padding: 10px;
+  float: right;
+}
+body .vue-app-2 .note-cats-wrapper {
+  padding: 0px 30px;
+  padding-top: 2px;
+  text-align: center;
+}
+body .vue-app-2 .note-cats-wrapper select {
+  margin: auto;
+}
+body .vue-app-2 .note-cats-wrapper .note-cats span {
+  height: 27px;
+  width: 27px;
+  padding: auto auto;
+  text-align: center;
+  padding: 0px;
+  border: 2px solid white;
+  border-radius: 66%;
+}
+body .vue-app-2 .note-cats-wrapper .note-cats span::before, body .vue-app-2 .note-cats-wrapper .note-cats span::after {
+  display: none !important;
+}
+body .vue-app-2 .note-cats-wrapper .note-cats input[type=radio]:checked + span {
+  border: 3px solid #333333;
+}
+@media only screen and (max-width: 600px) {
+  body .working-bench {
+    border: none !important;
+  }
+  body .cat-span {
+    width: 100%;
+    z-index: 10;
+    height: 5px;
+    display: block;
+    position: fixed;
+    top: 0;
+  }
+  body .header {
+    margin-bottom: 0px !important;
+  }
+  body .header .list-title {
+    font-size: 20px !important;
+  }
+  body .header .note-cats-wrapper {
+    text-align: right;
+  }
+  body .header .note-cats-wrapper .note-cats {
+    padding: 0px 5px;
+  }
+  body .header .note-cats-wrapper .note-cats span {
+    height: 25px !important;
+    width: 25px !important;
   }
 }
 

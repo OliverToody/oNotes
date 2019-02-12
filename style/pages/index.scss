@@ -11,25 +11,25 @@ body {
     .sidenav-overlay {
         z-index:2 !important;
     }
-    .vue-app {
-        /***************************************/
-        /* Navigation                          */
-        /***************************************/
-        nav {
-            .fas {
-                font-size: 17px !important;
-                color: white !important;
-            }
-            .brand-logo {
-                margin-left: 10px;
-                color: white !important;
 
-            }
-            .sidenav {
-                z-index: 100;
-            }
-            
+    nav {
+        .fas {
+            font-size: 17px !important;
+            color: white !important;
         }
+        .brand-logo {
+            margin-left: 10px;
+            color: white !important;
+        }
+        .sidenav {
+            z-index: 100;
+        }
+        .dropdown-trigger {
+            display: none;
+        }
+    }
+
+    .vue-app {
         /***************************************/
         /* Note list                           */
         /***************************************/
@@ -111,10 +111,11 @@ body {
         }
         .working-bench {
             margin: 0px;
-            height: 80vh;
+           // height: 80vh;
             .controls {
                 //margin: 0px auto;;
-                padding: 5px 5px;
+                padding: 5px 25px 5px 9px;
+                margin-bottom:5px !important;
                 background:white;
                 z-index: 200;
                 height: 50px;
@@ -135,7 +136,6 @@ body {
             }
             .note-header {
                 margin-bottom: 0px !important;
-                margin-top:50px;
                 .input-field {
                     label {
                         margin-top: 6px;
@@ -199,8 +199,9 @@ body {
                     border-top: 2px solid $alternative;
                 }*/
                 #editor {
-                    min-height:400px !important;
+                    min-height:200px !important;
                     border: none !important;
+                    height:auto;
                 }
                 select {
                     display: inline-block;
@@ -243,19 +244,49 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-    .note-header {
-        .noteTitleLabel {
-            display: none;
+    .dropdown-cat {
+        li {
+        label {
+            font-size: 16px;
+        color: #3367d6;
+        display: block;
+        line-height: 22px;
+        padding:10px;
         }
-.note-title {
-    text-align: center;
-}
+    }
+    }
+    .controls {
+        padding:10px !important;
+    }
+    .cat-span {
+        width: 100%;
+        height:5px;
+        display:block;
+        position: fixed;
+        z-index: 10;
+        top: 0;
+    }
+    nav {
+        .dropdown-trigger {
+            display: inline-block !important;
+            padding:0px 20px;
+        }
+        .brand-logo {
+            //transform: translateX(-100%) !important;
+        }
+    }
+    .note-header {
+        padding:0px 10px;
 
-.note-cats {
-    margin-top:-10px;
-}
 .note-cats-wrapper {
     text-align: center;
+    .note-cats {
+        span {
+            height:20px !important;
+            width: 20px !important;
+        }
+    }
+
 }
     }
 
@@ -263,5 +294,8 @@ body {
         height: 37px;
         overflow: hidden;
         border:none;
+    }
+    .noteTitleLabel {
+        display:none;
     }
 }

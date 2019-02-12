@@ -1,3 +1,6 @@
+var profileName = "";
+var profileEmail = "";
+var profileImage = "";
 function onSignIn(googleUser) {
 	console.log("here");
 	// Useful data for your client-side scripts:
@@ -8,6 +11,9 @@ function onSignIn(googleUser) {
 	console.log('Family Name: ' + profile.getFamilyName());
 	console.log("Image URL: " + profile.getImageUrl());
 	console.log("Email: " + profile.getEmail());
+	profileName = profile.getName();
+	profileEmail = profile.getImageUrl();
+	profileImage = profile.getImageUrl();
 
 	// The ID token you need to pass to your backend:
 	var id_token = googleUser.getAuthResponse().id_token;

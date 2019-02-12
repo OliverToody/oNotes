@@ -14,6 +14,7 @@
     <meta name="theme-color" content="#3367d6"/>
     <link rel="shortcut icon" href="img/notepad.png" type="image/x-icon" />
    <meta name="description" content="Free Note Taking App!">
+
     <link rel="manifest" href="manifest.json">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
@@ -29,47 +30,31 @@
       <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
       <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
       
-      <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com">
+   <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script>
-//This is the "Offline page" service worker
-
-//Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
-if (navigator.serviceWorker.controller) {
-  console.log('[PWA Builder] active service worker found, no need to register')
-} else {
-  //Register the ServiceWorker
-  navigator.serviceWorker.register('pwabuider-sw.js', {
-    scope: './'
-  }).then(function(reg) {
-    console.log('Service worker has been registered for scope:'+ reg.scope);
-  });
-}
-</script>
+  
                </head>
    <body bg-color="#e4ba4e">
       <div id="vue-app-one" class="vue-app">
          <div class="container-fluid">
-            <div class="navbar-fixed">
+            <div class="navbar-fixed" v-show="show.show_listing">
          <nav>
-		<div class="nav-wrapper">
-			 <a href="index.php" class="brand-logo"><b>SimplyNote</b></a>
+		<div class="nav-wrapper" >
+			 <a href="index.php" class="brand-logo"><b>My notes</b></a>
 			 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-					<li @click="newui"><a><i class="fas fa-plus"></i></a></li>
-					<li><a href=""><i class="fas fa-info-circle"></i></a></li>
-					<li><a href=""><i class="fas fa-user-alt"></i></a></li>
-					<li><a href="" onclick="mobileInfo()"><i class="fas fa-mobile-alt"></i></a></li>
+					<li><a href="shoplist.php"><b>My Lists</b></a></li>
+					<li><a href="profile.php">Profile</a></li>
 					<li><a href="#" onclick="signOut();">Sign out</a></li>
 			 </ul>
           <ul class="sidenav" id="mobile-demo">
                <li class="black-text center-align"><b>SimplyNote 2019</b></li>
-               <li @click="newui"><a>Add new note</a></li>
-               <li><a href="">Settings</a></li>
-               <li><a href="">SimplyNote for Mobile</a></li>
-               <li><a href="">About</a></li>
-					<li><a href="api/destroy.php" onclick="signOut()">Sign out</a></li>
+               <li><a href="shoplist.php"><b>My Lists</b></a></li>
+					<li><a href="profile.php">Profile</a></li>
+					<li><a href="#" onclick="signOut();">Sign out</a></li>
   </ul>
+ 
+  
 		</div>
  </nav>   
 </div>   
@@ -110,20 +95,35 @@ if (navigator.serviceWorker.controller) {
                </div>
                <div class="col m9" style="padding:0px;">
                   <div class="working-bench">
+                  <span v-bind:class="post.notePost.note_category" class="cat-span"></span>
                      <div class="create-new" v-show="show.edit_mode">
                         <div class="row controls" >
-                           <div class="col m6 s10">
-                              <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>
-                              <!--<i class="fas fa-info-circle fa-lg" @click="showInfo"></i>-->
-                              <i class="fas fa-bell fa-lg" @click="showCalendar"></i>
-                              <i class="fas fa-share-alt  fa-lg" @click="showSharing"></i>
-                           <i class="fas fa-print fa-lg " @click="exportPDF"></i>
-                          <!-- <i class="fas fa-envelope fa-lg" @click="moreEmailOptions"></i>-->
-                           <i class="fas fa-trash-alt delete  fa-lg" @click="deleteNote(post.notePost.note_id)"></i>
-                           </div>
-                           <div class="col m6 s2 right-align">
-                           <i class="fas fa-save save  fa-3x" @click="sendNotes"></i>
-                   
+                           <div class="col m12 s12">
+                              <i class="fas fa-save" @click="sendNotes"></i>
+                              <a href="#" class="dropdown-trigger right right-align" data-target="dropdown1" v-show="! show.show_listing">
+                              <i class="fas fa-ellipsis-v"></i>
+                              </a>
+                              <a href="#" class="dropdown-trigger right right-align" data-target="dropdown-cat" v-show="! show.show_listing">
+                              <i class="fas fa-tag"></i>
+                              </a>
+                              <i class="fas fa-info-circle fa-lg" @click="showInfo" v-show="show.show_listing"></i>
+                              <i class="fas fa-bell fa-lg" @click="showCalendar" v-show="show.show_listing"></i>
+                              <i class="fas fa-share-alt  fa-lg" @click="showSharing" v-show="show.show_listing"></i>
+                           <i class="fas fa-print fa-lg " @click="exportPDF" v-show="show.show_listing"></i>
+                          <i class="fas fa-envelope fa-lg" @click="moreEmailOptions" v-show="show.show_listing"></i>
+                          <i class="fas fa-save fa-lg right" @click="sendNotes" v-show="show.show_listing"></i>
+                           <ul id="dropdown1" class="dropdown-content">
+                           <li><a href="#" @click="show.edit_mode = !show.edit_mode; show.show_listing = true">Back without save</a></li>
+                           <li><a href="#" @click="exportPDF">To PDF</a></li>
+                           <li><a href="#" @click="show.edit_mode = !show.edit_mode; show.listing = true">Share</a></li>
+                           <li><a href="#" @click="deleteNote(post.notePost.note_id)">Delete</a></li>
+                           </ul>
+                           <ul id="dropdown-cat" class="dropdown-content dropdown-cat">
+                           <li><label><input name="indigo" value="indigo" v-model.lazy="post.notePost.note_category" type="radio" />Blue</label></li>
+                           <li><label><input name="orange" value="orange" v-model.lazy="post.notePost.note_category" type="radio" />Orange</label></li>
+                           <li><label><input name="pink" value="pink" v-model.lazy="post.notePost.note_category" type="radio" />Pink</label></li>
+                           <li><label><input name="green" value="green" v-model.lazy="post.notePost.note_category" type="radio" />Green</label></li>
+                           </ul>                   
                            </div>
                         </div>
                         <div class="show-calendar" v-show="show.show_calendar">
@@ -174,38 +174,22 @@ if (navigator.serviceWorker.controller) {
                         </div>       
                         <input type="hidden" v-model.lazy="post.notePost.note_id" />
                         <div class="row note-header">
-                        <div class="col m6 s12 input-field">
+                        <div class="col m10 s12">
                         <label for="noteTitle" class="noteTitleLabel">Note title</label>
-                        <input type="text" v-model.lazy="post.notePost.note_title" required="true" placeholder="Note title" name="noteTitle" class="note-title"/>
+                        <input type="text" v-model.lazy="post.notePost.note_title" required="true" placeholder="Note title" name="noteTitle" class="note-title grey-text text-darken-1"/>
                         <span v-if="post.sharingInfo.privilege_name" @click="showInfo"><i>
                         <span v-if="post.sharingInfo.ownerName == profile.nickname">You shared this note</span>
                          <span v-if="post.sharingInfo.ownerName != profile.nickname">Shared note by {{post.sharingInfo.ownerName}}</span></i></span>
                         </div>
-                        <div class="col m6 s12 right-align note-cats-wrapper">
-                        <label v-show="show.show_listing">Select color category</label>
-                        <p class="note-cats">
-                        <label>
-                        <input name="indigo" value="indigo" v-model.lazy="post.notePost.note_category" type="radio" checked />
-                        <span class="indigo"></span>
-                        </label>
-                        <label>
-                        <input name="orange"  value="orange" v-model.lazy="post.notePost.note_category" type="radio"  />
-                        <span class="orange"></span>
-                        </label>
-                        <label>
-                        <input name="pink" value="pink" v-model.lazy="post.notePost.note_category" type="radio"  />
-                        <span class="pink"></span>
-                        </label>
-                        <label>
-                        <input name="green" value="green" v-model.lazy="post.notePost.note_category" type="radio"  />
-                        <span class="green"></span>
-                        </label>
-                        <label>
-                        <label>
-                        <input name="brown" value="brown" v-model.lazy="post.notePost.note_category" type="radio"  />
-                        <span class="brown"></span>
-                        </label>
-                     </p>
+                        <div class="col m2 s5 right-align note-cats-wrapper right-align" v-show="show.show_listing">
+                           <label>Category</label>
+                        <select v-model="post.notePost.note_category" class="browser-default">
+                        <option value="blue">Blue</option>
+                        <option value="orange">Orange</option>
+                        <option value="pink">Pink</option>
+                        <option value="green">Green</option>
+                        <option value="brown">Brown</option>
+                   </select>
                   </div>
                   </div>
                   <div id="editor">
@@ -213,9 +197,12 @@ if (navigator.serviceWorker.controller) {
       
                <textarea v-model="post.notePost.note" style="display:none;"></textarea>
                      </div>
-                     <a id="scale-demo" @click="newui" href="#!" class="btn-floating btn-large scale-transition add-note">
+                     <a id="scale-demo" @click="newui" v-show="! show.edit_mode" href="#!" class="btn-floating btn-large scale-transition add-note">
     <i class="material-icons white-text">add</i>
   </a> 
+  <!--<a id="scale-demo" @click="sendNotes" href="#!" v-show="show.edit_mode" class="btn-floating btn-large scale-transition add-note">
+    <i class="material-icons white-text">save</i>
+  </a> -->
 
                   </div>
                </div>
@@ -258,5 +245,6 @@ var quill = new Quill('#editor', {
 });
 </script>
    </body>
+
 </html>
 

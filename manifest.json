@@ -4,7 +4,7 @@
     "theme_color": "#3367d6",
     "background_color": "#3367d6",
     "scope" : "/main.html",
-    "display": "fullscreen",
+    "display": "standalone",
     "orientation": "portrait",
     "start_url": "http://simplynote.eu5.org/index.php",
     "icons": [
@@ -12,7 +12,8 @@
           "src": "/img/notepad.png",
           "sizes": "72x72",
           "type": "image/png"
-        }
+        },
+
       ]
   }
   
