@@ -18,6 +18,12 @@ window.location.href = "../oNotes/api/destroy.php";
 
         $(".dropdown-trigger").dropdown();
 
+        if (document.cookie.indexOf("user_id") < 0) {
+                    window.location.href = "main.html";
+
+        }
+
+ 
       /* function clearWorkbench() {
             return "You are asshole";
        }*/

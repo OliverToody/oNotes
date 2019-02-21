@@ -4,9 +4,9 @@ require('session.php');
 
 $out = array();
 
-$out['email'] = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-$out['user_id'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
-$out['nickname'] =isset($_SESSION['nickname']) ? $_SESSION['nickname'] : '';
+$out['email'] = isset($_COOKIE['email']) ? $_COOKIE['email'] : '';
+$out['user_id'] = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+$out['nickname'] =isset($_COOKIE['nickname']) ? $_COOKIE['nickname'] : '';
 
 
 $conn->close();

@@ -2,13 +2,9 @@
 <html>
 
 <head>
-  <?php 
-   session_start();
-   if(! isset($_SESSION['user_id'])) {
-      header('Location: main.html');
-   }
-   ?>
+<script type="text/javascript" language="JavaScript">
 
+</script>
   <title>SimplyNote</title>
 
   <meta charset="utf-8">
@@ -85,39 +81,20 @@
             
            
             <ul class="right hide-on-med-and-down">
-              <li>
-                <a href="index.php">
-                  <b>My Notes</b>
-                </a>
-              </li>
-              <li>
-                <a href="profile.php">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href="#">Sign out</a>
-              </li>
-            </ul>
+            <li><a href="index.php"><b>My Notes</b></a></li>
+               <li class="active"><a href="#"><b>My Lists</b></a></li>
+               <li><a href="audio.html"><b>My Audio</b></a></li>
+               <li><a href="api/destroy.php">Logout</a></li>
+                </ul>
 
             <ul class="sidenav" id="mobile-demo">
               <li class="black-text center-align">
                 <b>SimplyNote 2019</b>
               </li>
-
-              <li>
-                <a href="index.php">
-                  <b>My Notes</b>
-                </a>
-              </li>
-              <li>
-                <a href="profile.php">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href="#">Sign out</a>
-              </li>
+              <li><a href="index.php">My Notes</a></li>
+              <li class="active"><a href="#">My Lists</a></li>
+              <li><a href="audio.html">My Audio</a></li>
+              <li><a href="api/destroy.php">Sign out</a></li>
             </ul>
           </div>
         </nav>
@@ -153,7 +130,8 @@
             <span class="list-cat" v-bind:class="list.category"></span>
           <i class="fas fa-list fa-lg"></i>
            <p class="list-name"><b>{{list.list_name}}</b></p>
-        </div>  
+           <span v-show="list.privilege == 1"><i class="fas fa-share-alt"></i></span>
+        </div> 
         </div>
         </div>
         <div class="col m7 s12" style="padding:0px;">
@@ -161,15 +139,18 @@
         <span v-bind:class="postwItem.list_category" class="cat-span"></span>
           <div class="row controls">
           <i class="fas fa-save" @click="saveList(postwItem.list_id)"></i>
-          <a href="#" class="dropdown-trigger right right-align" data-target="dropdown1" v-show="show.edit_mode">
+          <i class="fas fa-share-alt" @click="shareDialog" v-show="show.listing && postwItem.privilege != 1"></i>
+          <i class="fas fa-trash" @click="deleteList(postwItem.list_id)" v-show="show.listing && postwItem.privilege != 1"></i>
+          <i class="fas fa-times right right-align" @click="show.edit_mode = !show.edit_mode; show.listing = true" v-show="show.edit_mode && ! show.listing"></i>
+
+          <a href="#" class="dropdown-trigger right right-align" data-target="dropdown1" v-show="show.edit_mode && ! show.listing && postwItem.privilege != 1">
               <i class="fas fa-ellipsis-v"></i>
             </a>
             <a href="#" class="dropdown-trigger right right-align" data-target="dropdown-cat" v-show="! show.listing">
             <i class="fas fa-tag"></i>
             </a>
             <ul id="dropdown1" class="dropdown-content">
-          <li><a href="#" @click="show.edit_mode = !show.edit_mode; show.listing = true">Back without save</a></li>
-          <li><a href="#" @click="show.edit_mode = !show.edit_mode; show.listing = true">Share</a></li>
+          <li @click="shareDialog"><a href="#">Share</a></li>
           <li><a href="#" @click="deleteList(postwItem.list_id)">Delete</a></li>
           </ul>
           <ul id="dropdown-cat" class="dropdown-content dropdown-cat">
@@ -182,8 +163,11 @@
           <div class="wItems">
               <div class="row header">
                 <div class="col m9 s12">
-            <label for="listTitle" class="noteTitleLabel">List title</label>
             <input type="text" v-model.lazy="postwItem.list_name" required="true" placeholder="List title" name="listTitle" class="list-title  grey-text text-darken-2"/>
+          <span v-show="postwItem.privilege == 1">Shared by {{postwItem.owner}}</span>
+          <span v-show="postwItem.shared && postwItem.privilege != 1">
+          <span @click="shareDialog" style="cursor:pointer; font-style:italic; text-decoration: underline;">Shared list <i class="fas fa-share grey-text"></i></span>
+          </span>
         </div>
         <div class="col m3 s5 note-cats-wrapper" v-show="show.listing">
          
@@ -240,65 +224,9 @@
               <br>
               <button class="btn" @click="addItem()"><i class="fas fa-plus"></i></button>
           </div>
-          <div class="col m4 s4 right-align note-cats-wrapper">
-              <label v-show="show.show_listing">Select color category</label>
-
-              <p class="note-cats">
-                <label>
-                  <input name="indigo" value="indigo" v-model.lazy="postItem.category" type="radio" checked="checked">
-
-                  <span class="indigo"></span>
-                </label>
-
-                <label>
-                  <input name="orange" value="orange" v-model.lazy="postItem.category" type="radio">
-
-                  <span class="orange"></span>
-                </label>
-                <br>
-                <label>
-                  <input name="pink" value="pink" v-model.lazy="postItem.category" type="radio">
-
-                  <span class="pink"></span>
-                </label>
-
-                <label>
-                  <input name="green" value="green" v-model.lazy="postItem.category" type="radio">
-
-                  <span class="green"></span>
-                </label>
-
-                <label></label>
-              </p>
-            </div>
           </div>
-
-            <div class="greenItems">
-              <span class="listItem" v-for="item in green_items">
-                <span class="itemname" @click="addwItem(item.name, postwItem.list_id)">{{item.name}}</span>
-
-                <i class="fas fa-times grey-text" @click="removeItem(item.id)"></i>
-              </span>
-            </div>
-
-            <div class="orangeItems">
-              <span class="listItem" v-for="item in orange_items">
-                <span class="itemname" @click="addwItem(item.name, postwItem.list_id)">{{item.name}}</span>
-
-                <i class="fas fa-times grey-text" @click="removeItem(item.id)"></i>
-              </span>
-            </div>
-
-            <div class="pinkItems">
-              <span class="listItem" v-for="item in pink_items">
-                <span class="itemname" @click="addwItem(item.name, postwItem.list_id)">{{item.name}}</span>
-
-                <i class="fas fa-times grey-text" @click="removeItem(item.id)"></i>
-              </span>
-            </div>
-
-            <div class="blueItems">
-              <span class="listItem" v-for="item in blue_items">
+            <div class="common_items">
+              <span class="listItem" v-for="item in listItems">
                 <span class="itemname" @click="addwItem(item.name, postwItem.list_id)">{{item.name}}</span>
 
                 <i class="fas fa-times grey-text" @click="removeItem(item.id)"></i>
@@ -313,15 +241,30 @@
         <div class="shower center-align" @click="show.commons = false" v-show="show.commons">
           <i class="fas fa-angle-up fa-3x grey-text"></i>
         </div>
+        <div class="share-dialog" v-show="show.shareDialog" @click="shareDialog">
+
+    </div>
+
     </div>
     </div>
   </div>
   </div>
+  <div class="context" v-show="show.shareDialog">
+<h5 class="center-align">Sharing options</h5>
+<h6 class="center-align">Shared to users</h6>
+<div v-for="user in share.toUsers" style="border:1px solid lightgray; padding:5px; margin:3px;">
+{{user.email}}
+<i class="fas fa-times right grey-text" @click="cancelUserShare(user.user_id, postwItem.list_id)"></i>
+</div>
+<input placeholder="Email" min="1" type="email" v-model="share.email">
+<button class="btn-flat active" @click="shareList(postwItem.list_id)">Share</button>
+</div>
 </div>
   <script src="js/vue.js"></script>
   <script src="js/axios.js"></script>
   <script src="js/two.js"></script>
   <script src="js/other.js"></script>
+
 </body>
 
 </html>

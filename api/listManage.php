@@ -4,14 +4,16 @@ require('session.php');
 $method = $_SERVER['REQUEST_METHOD'];
 
 if($method == 'GET'){
-	$sql = "SELECT * FROM lists WHERE user_id = '$user_id'";
+	$sql = "SELECT L.id, L.list_name, L.category, DL.user_id, DL.privilege, U.email FROM displayedList DL 
+	LEFT JOIN lists L ON DL.list_id = L.id 
+	LEFT JOIN users U ON U.user_id = L.user_id 
+	WHERE DL.user_id = '$user_id'";
 	$query = $conn->query($sql);
 	$items = array();
 
 	while($row = $query->fetch_array()){
 		array_push($items, $row);
 	}
-
 
 	$out['lists'] = $items;
 }
@@ -24,47 +26,27 @@ if($method == 'DELETE'){
 	} else {
 		$out['error'] = $conn->error;
 	}
-	$sql = "DELETE FROM working_list WHERE list_id='$item_id_request'";
-	if ($conn->query($sql) === TRUE) {
-		$out['error'] = 'false';
-	} else {
-		$out['error'] = $conn->error;
-	}
-	
+
 }
 
 if($method == 'POST'){
-	$sql = "insert into lists set user_id='$user_id', list_name='New List', category='blue'";
+	$sql = "insert into lists set user_id='$user_id', list_name='Untitled', category='blue'";
 	if ($conn->query($sql) === TRUE) {
 		$last_id = $conn->insert_id;
 		$out['last'] = $last_id;
 	} else {
 		$out['error'] = $conn->error;
 	}
+	
+	$sql = "insert into displayedList set list_id='$last_id', user_id='$user_id', privilege='3'";
+	if ($conn->query($sql) === TRUE) {
+		$out['error'] = false;
+	} else {
+		$out['error'] = $conn->error;
+	}
 }
 	
 
-/*
-if($method == 'PUT'){
-
-    $input = json_decode(file_get_contents('php://input'),true);
-    $newnote = $input['notePost']['note'];
-    $newnotetitle = $input['notePost']['note_title'];
-    $note_id = $input['notePost']['note_id'];
-    $newnotecategory = $input['notePost']['note_category'];
-    $deadline = $input['notePost']['deadline'];
-    
-        $sql = "update notes set note='$newnote', note_title='$newnotetitle', note_category='$newnotecategory'  WHERE note_id='$note_id'";
-        if ($conn->query($sql) === TRUE) {
-            $out['error'] = 'false';
-        } else {
-            $out['error'] = $conn->error;
-            $out['this'] = "is erro";
-
-        }
-        
-    }
-*/
 $conn->close();
 
 header("Content-type: application/json");

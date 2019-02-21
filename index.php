@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-   <?php 
-   session_start();
-   if(! isset($_SESSION['user_id'])) {
-      header('Location: main.html');
-   }
-   ?>
+
       <title>SimplyNote</title>
       <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,15 +38,21 @@
 			 <a href="index.php" class="brand-logo"><b>My notes</b></a>
 			 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-					<li><a href="shoplist.php"><b>My Lists</b></a></li>
-					<li><a href="profile.php">Profile</a></li>
-					<li><a href="#" onclick="signOut();">Sign out</a></li>
-			 </ul>
+            <li class="active"><a href="#">My Notes</a></li>
+               <li><a href="shoplist.php">My Lists</a></li>
+               <li><a href="audio.html">My Audio</a></li>
+               <li><a href="api/destroy.php">Logout</a></li>
+                </ul>
+          <ul id="more" class="dropdown-content">
+          <li>Settings</li>
+          <li>Logout</li>
+          </ul>
           <ul class="sidenav" id="mobile-demo">
                <li class="black-text center-align"><b>SimplyNote 2019</b></li>
-               <li><a href="shoplist.php"><b>My Lists</b></a></li>
-					<li><a href="profile.php">Profile</a></li>
-					<li><a href="#" onclick="signOut();">Sign out</a></li>
+               <li class="active"><a href="#">My Notes</a></li>
+              <li><a href="shoplist.php">My Lists</a></li>
+              <li><a href="audio.html">My Audio</a></li>
+              <li><a href="api/destroy.php">Sign out</a></li>
   </ul>
  
   
@@ -99,19 +100,20 @@
                      <div class="create-new" v-show="show.edit_mode">
                         <div class="row controls" >
                            <div class="col m12 s12">
-                              <i class="fas fa-save" @click="sendNotes"></i>
+                              <span><i class="fas fa-save" @click="sendNotes" ></i></span>
                               <a href="#" class="dropdown-trigger right right-align" data-target="dropdown1" v-show="! show.show_listing">
                               <i class="fas fa-ellipsis-v"></i>
                               </a>
                               <a href="#" class="dropdown-trigger right right-align" data-target="dropdown-cat" v-show="! show.show_listing">
                               <i class="fas fa-tag"></i>
                               </a>
-                              <i class="fas fa-info-circle fa-lg" @click="showInfo" v-show="show.show_listing"></i>
+                             <!-- <i class="fas fa-info-circle fa-lg" @click="showInfo" v-show="show.show_listing"></i>
                               <i class="fas fa-bell fa-lg" @click="showCalendar" v-show="show.show_listing"></i>
-                              <i class="fas fa-share-alt  fa-lg" @click="showSharing" v-show="show.show_listing"></i>
+                                <i class="fas fa-envelope fa-lg" @click="moreEmailOptions" v-show="show.show_listing"></i>
+-->                          <!-- <i class="fas fa-arrow-left" @click="show.edit_mode = !show.edit_mode; show.show_listing = true"></i>-->
+                              <i class="fas fa-share-alt  fa-lg" @click="shareDialog" v-show="show.show_listing && post.notePost.privilege != 1"></i>
                            <i class="fas fa-print fa-lg " @click="exportPDF" v-show="show.show_listing"></i>
-                          <i class="fas fa-envelope fa-lg" @click="moreEmailOptions" v-show="show.show_listing"></i>
-                          <i class="fas fa-save fa-lg right" @click="sendNotes" v-show="show.show_listing"></i>
+                          <i class="fas fa-trash fa-lg " @click="deleteNote(post.notePost.note_id)"  v-show="show.show_listing && post.notePost.privilege != 1"></i>
                            <ul id="dropdown1" class="dropdown-content">
                            <li><a href="#" @click="show.edit_mode = !show.edit_mode; show.show_listing = true">Back without save</a></li>
                            <li><a href="#" @click="exportPDF">To PDF</a></li>
@@ -126,60 +128,15 @@
                            </ul>                   
                            </div>
                         </div>
-                        <div class="show-calendar" v-show="show.show_calendar">
-                           <p>Set a date when you want to be reminded via email.</p>  
-                           <input type="text" v-model.lazy="post.notePost.deadline" class="datepicker">
-                           <button class="btn" @click="sendNotes">Remind me on this date</button>
-                        </div>
-                        <div class="show-sharing" v-show="show.show_sharing">
-                        <i class="fa fa-share-alt fa-lg"></i>
-                        <span class="input-field">
-                        <input v-model="share.shared_to_user" name="share_user" placeholder="Share to user">
-                        </span>
-                        <select v-model="share.privilege">
-                           <option value="" disabled selected>Choose privilege</option>
-                           <option value="1">View</option>
-                           <option value="2">Edit</option>
-                           <option value="3">Full permissions</option>
-                        </select>
-                        <button class="btn" @click="shareNote(post.notePost.note_id)">Share note</button>
-                        </div>
-                        <div class="show-info" v-show="show.show_info">
-                        <span><b>Created:</b> {{post.notePost.created}}</span>
-                        <div v-if="post.sharingInfo.ownerName != profile.nickname">
-                        <span v-if="post.sharingInfo.privilege_name"><br/> <b>{{post.sharingInfo.privilege_name}}</b> permission granted from the note owner({{post.sharingInfo.ownerName}}).</span>
-                        <span v-if="post.sharingInfo.privilege_description"><br> {{post.sharingInfo.privilege_description}}</span>
-                       </span>
-                       
-                        </div>
-                        <div v-if="post.sharingInfo.ownerName == profile.nickname">
-
-                       <span><b>Note shared to:</b></span>
-                       <span v-for="users in post.sharingInfo.users">
-                       <span>{{users}}
-                       </div>
-                        </div>
-                        <div class="more-email-options" v-show="show.more_email_options">
-                        
-                        <h6>Email options</h6>
-                        <label>
-                        <input name="email" value="me"  type="radio" checked />
-                        <span class="">Email to me</span>
-                        </label>
-                        <label>
-                        <input name="email"  value="custom" type="radio"  />
-                        <span class="">Custom Email</span>
-                        <button class="btn teal" @click="sendEmail">Send email</button>
-                        </label>
-                        </div>       
                         <input type="hidden" v-model.lazy="post.notePost.note_id" />
                         <div class="row note-header">
                         <div class="col m10 s12">
                         <label for="noteTitle" class="noteTitleLabel">Note title</label>
                         <input type="text" v-model.lazy="post.notePost.note_title" required="true" placeholder="Note title" name="noteTitle" class="note-title grey-text text-darken-1"/>
-                        <span v-if="post.sharingInfo.privilege_name" @click="showInfo"><i>
-                        <span v-if="post.sharingInfo.ownerName == profile.nickname">You shared this note</span>
-                         <span v-if="post.sharingInfo.ownerName != profile.nickname">Shared note by {{post.sharingInfo.ownerName}}</span></i></span>
+                        <span v-show="post.notePost.privilege == 1">Shared by {{post.notePost.owner}}</span>
+                              <span v-show="post.notePost.shared && post.notePost.privilege != 1">
+                        <span @click="shareDialog" style="cursor:pointer; font-style:italic; text-decoration: underline;">Shared list <i class="fas fa-share grey-text"></i></span>
+                        </span>
                         </div>
                         <div class="col m2 s5 right-align note-cats-wrapper right-align" v-show="show.show_listing">
                            <label>Category</label>
@@ -198,16 +155,28 @@
                <textarea v-model="post.notePost.note" style="display:none;"></textarea>
                      </div>
                      <a id="scale-demo" @click="newui" v-show="! show.edit_mode" href="#!" class="btn-floating btn-large scale-transition add-note">
-    <i class="material-icons white-text">add</i>
-  </a> 
-  <!--<a id="scale-demo" @click="sendNotes" href="#!" v-show="show.edit_mode" class="btn-floating btn-large scale-transition add-note">
-    <i class="material-icons white-text">save</i>
-  </a> -->
+                        <i class="material-icons white-text">add</i>
+                     </a> 
+                     <a id="scale-demo" @click="sendNotes" href="#!" v-show="show.edit_mode && show.show_listing" class="btn-floating btn-large scale-transition add-note">
+                        <i class="material-icons white-text">save</i>
+                     </a>
 
                   </div>
                </div>
             </div>
          </div>
+         <div class="share-dialog" v-show="show.shareDialog" @click="shareDialog">
+</div>
+         <div class="context" v-show="show.shareDialog">
+<h5 class="center-align">Sharing options</h5>
+<h6 class="center-align">Shared to users</h6>
+<div v-for="user in share.toUsers" style="border:1px solid lightgray; padding:5px; margin:3px;">
+{{user.email}}
+<i class="fas fa-times right grey-text" @click="cancelUserShare(user.user_id, post.notePost.note_id)"></i>
+</div>
+<input placeholder="Email" min="1" type="email" v-model="share.email">
+<button class="btn-flat active" @click="shareNote(post.notePost.note_id)">Share</button>
+</div>
       </div>
       <script src="js/vue.js"></script>
       <script src="js/axios.js"></script>

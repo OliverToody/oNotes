@@ -4,7 +4,10 @@ require('session.php');
 $method = $_SERVER['REQUEST_METHOD'];
 
 if($method == 'GET'){
-	$sql = "SELECT notes.note_id, notes.user_id, notes.note_title, notes.note_category, notes.note, notes.updated, notes.created, shared_notes_p.privilege_description, shared_notes_p.privilege_name , shared_notes_p.share_id, users.username AS ownerName, shared_notes_p.privilege_id, shared_notes_p.owner_id FROM notes LEFT JOIN (SELECT * FROM shared_notes LEFT JOIN privileges ON shared_notes.privilege = privileges.privilege_id ) AS shared_notes_p ON shared_notes_p.note_id = notes.note_id LEFT JOIN users ON notes.user_id = users.user_id WHERE notes.user_id = '$user_id' OR shared_notes_p.shared_to_user ='$user_id' ORDER BY notes.updated DESC ";
+	$sql = "SELECT notes.note_id, notes.user_id AS note_owner_id, users.email, displayedNotes.user_id, notes.note_title, notes.note_category, notes.note, notes.updated, notes.created, notes.deadline, displayedNotes.privilege FROM displayedNotes 
+	LEFT JOIN notes ON displayedNotes.note_id = notes.note_id
+	LEFT JOIN users ON notes.user_id = users.user_id 
+ WHERE displayedNotes.user_id='$user_id' ORDER BY notes.updated DESC ";
 	$query = $conn->query($sql);
 	$notes = array();
 
@@ -31,6 +34,8 @@ if($method == 'DELETE'){
 if($method == 'POST'){
 $input = json_decode(file_get_contents('php://input'),true);
 $input['notePost']['user_id'] = $user_id;
+unset($input['notePost']['shared']);
+unset($input['notePost']['privilege']);
 $input = $input['notePost'];
 	// escape the columns and values from the input object
 $columns = preg_replace('/[^a-z0-9_]+/i','',array_keys($input));
@@ -49,10 +54,19 @@ for ($i=0;$i<count($columns);$i++) {
 	$sql = "insert into notes set $set";
 	if ($conn->query($sql) === TRUE) {
 		$out['error'] = 'false';
+		$last_id = $conn->insert_id;
+
 	} else {
 		$out['error'] = $conn->error;
 	}
 	
+	$sql = "insert into displayedNotes set note_id='$last_id', user_id='$user_id', privilege='3'";
+	if ($conn->query($sql) === TRUE) {
+		$out['error'] = false;
+	} else {
+		$out['error'] = $conn->error;
+	}
+
 }
 
 if($method == 'PUT'){

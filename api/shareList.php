@@ -8,7 +8,7 @@ if($method == 'POST'){
 	$input = json_decode(file_get_contents('php://input'),true);
 	$shareUser = "";
 	$email = $input['email'];
-	$note_id = $input['note_id'];
+	$list_id = $input['list_id'];
 	$sql = "SELECT * FROM users WHERE email='$email'";
 	$query = $conn->query($sql);
 	while($row = $query->fetch_array()){
@@ -16,20 +16,21 @@ if($method == 'POST'){
 	}
 	$out['inpout'] = $input;
 
-		$sql = "INSERT INTO displayedNotes (`note_id`,`user_id`, `privilege`) VALUES ($note_id,$shareUser,1)";
+		$sql = "INSERT INTO displayedList (`list_id`,`user_id`, `privilege`) VALUES ($list_id,$shareUser,1)";
 		if ($conn->query($sql) === TRUE) {
 			$out['error'] = 'false';
 		} else {
 			$out['error'] = $conn->error;
 		}
 	
-		
 	}
+
+
 if($method == 'GET') {
-	$note_id = $_GET['note_id'];
-	$sql = "SELECT users.email, users.user_id FROM displayedNotes
-	LEFT JOIN users ON displayedNotes.user_id = users.user_id
-	WHERE displayedNotes.note_id='$note_id' AND  displayedNotes.user_id <> '$user_id'";
+	$list_id = $_GET['list_id'];
+	$sql = "SELECT users.email, users.user_id FROM displayedList 
+	LEFT JOIN users ON displayedList.user_id = users.user_id
+	WHERE displayedList.list_id='$list_id' AND  displayedList.user_id <> '$user_id'";
 	$query = $conn->query($sql);
 	$sharedToUsers = array();
 	while($row = $query->fetch_array()){
@@ -40,8 +41,8 @@ if($method == 'GET') {
 
 if($method == 'DELETE'){
 	$sharedToUser = $_GET['user_id'];
-	$note_id = $_GET['note_id'];
-	$sql = "DELETE FROM displayedNotes WHERE user_id='$sharedToUser' AND note_id='$note_id'";
+	$list_id = $_GET['list_id'];
+	$sql = "DELETE FROM displayedList WHERE user_id='$sharedToUser' AND list_id='$list_id'";
 	if ($conn->query($sql) === TRUE) {
 		$out['error'] = 'false';
 	} else {

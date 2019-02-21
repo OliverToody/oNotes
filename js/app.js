@@ -25,17 +25,10 @@ var one = new Vue({
 				note_category:"",
 				updated: "",
 				created:"",
+				shared: false,
+				privilege: "",
 				deadline: ""
 				},
-			sharingInfo: {
-				privilege_name: "",
-				privilege_description: "",
-				ownerName: "",
-				privilege_id: "",
-				owner_id:"",
-				users: [],
-				test: ""
-			}
 		},
 		get_notes: [],
 		get_note: [],
@@ -63,8 +56,14 @@ var one = new Vue({
 			show_info: false,
 			show_sharing: false,
 			show_calendar: false,
-			show_listing: true
+			show_listing: true,
+			shareDialog: false
 		},
+		share: {
+            email: "",
+            toUsers: "",
+            note_id: ""
+        },
 		filter_cat: "All"
 				
 	},
@@ -195,17 +194,17 @@ var one = new Vue({
 					one.post.notePost.updated =	one.get_notes[i].updated;
 					one.post.notePost.created =	one.get_notes[i].created;
 					one.post.notePost.deadline = one.get_notes[i].deadline;
-					one.post.sharingInfo.ownerName = one.get_notes[i].ownerName;
-					one.post.sharingInfo.privilege_name =	one.get_notes[i].privilege_name;
-					one.post.sharingInfo.privilege_description =	one.get_notes[i].privilege_description;
-					one.post.sharingInfo.privilege_id =	one.get_notes[i].privilege_id;
-					one.post.sharingInfo.owner_id =	one.get_notes[i].owner_id;
-					one.post.sharingInfo.users = [];
+					one.post.notePost.privilege = one.get_notes[i].privilege;
+					one.post.notePost.owner = one.get_notes[i].email;
+					
 					$('.ql-editor').html(one.post.notePost.note);
-					one.getSharingInfo(one.post.notePost.note_id);
+					//one.getSharingInfo(one.post.notePost.note_id);
 
 				}
 			}
+			if(navigator.onLine) { // true|false
+                one.getUserShares(index);
+            }
 		},
 		deleteNote: function(index) {
 			one.show.edit_mode = false;
@@ -238,79 +237,7 @@ var one = new Vue({
 		exportPDF: function() {
 			printJS({ printable: 'editor', type: 'html', header: 'PrintJS - Form Element Selection',showModal:true });
 		},
-		showInfo: function() {
-			one.show.more_email_options = false;
-			one.show.show_sharing = false;
-			one.show.show_info = ! one.show.show_info;
-			one.show.show_calendar = false;
 
-		},
-		moreEmailOptions: function() {
-			one.show.more_email_options = ! one.show.more_email_options;
-			one.show.show_info = false;
-			one.show.show_sharing = false;
-			one.show.show_calendar = false;
-
-		},
-		showSharing: function() {
-				one.show.show_sharing= ! one.show.show_sharing;
-				one.show.show_info = false;
-				one.show.more_email_options = false;
-				one.show.show_calendar = false;
-
-		},
-		showCalendar: function() {
-			one.show.show_calendar = ! one.show.show_calendar;
-			one.show.show_info = false;
-			one.show.more_email_options = false;
-			one.show.show_sharing = false;
-	},
-		shareNote: function(note_id) {
-			one.sendNotes();
-			one.share.note_id = note_id;
-			one.share.owner_id = one.profile.user_id;
-
-			axios.post('api/shareNote.php', JSON.stringify(this.share)
-			  ).then(function (response) {
-				console.log(response);
-			  }).catch(function (error) {
-				console.log(error);
-				});
-		},
-		getSharingInfo: function(note_id) {
-			//if(one.get_notes[i].owner_id != one.profile.user_id) {
-				if(one.post.sharingInfo.privilege_id == 1 && one.post.sharingInfo.owner_id != one.profile.user_id) {
-					quill.disable();
-					$('.ql-toolbar').hide();
-					$('input.note-title').prop('disabled', true);
-					$('.fa-save, .delete,.controls .fa-share-alt, .note-cats-wrapper').hide();
-				} 
-				else if (one.post.sharingInfo.privilege_id == 2 && one.post.sharingInfo.owner_id != one.profile.user_id) {
-					quill.enable();
-					$('.ql-toolbar').show();
-					$('input.note-title').prop('disabled', false);
-					$('.fa-save,  .note-cats-wrapper').show();
-					$('.delete').hide();
-				} else {
-					quill.enable();
-					$('.ql-toolbar').show();
-					$('input.note-title').prop('disabled', false);
-					$('.fa-save,.controls  .fa-share-alt, .note-cats-wrapper, .delete').show();
-				}
-			//}
-			axios.get('api/shareNote.php?note_id=' + note_id)
-				.then(function(response){
-					if(response.data.error){
-						console.log(response.data.message);
-					}
-					else{
-						one.post.sharingInfo.test = response.data.shared_to;
-						for (var i = 0; i < one.post.sharingInfo.test.length; i++) {
-							one.post.sharingInfo.users.push(one.post.sharingInfo.test[i].username);
-						}
-					}
-				});
-		},
 		signOut: function() {
 			var auth2 = gapi.auth2.getAuthInstance();
 			console.log(auth2);
@@ -318,7 +245,42 @@ var one = new Vue({
 			  console.log('User signed out.');
 			});
 		
-		}
+		},
+		shareDialog: function() {
+			one.show.shareDialog = ! one.show.shareDialog;
+			one.getUserShares(one.post.notePost.note_id);
+		},
+		shareNote: function(noteId) {
+			one.share.note_id = noteId;
+			one.show.shareDialog = ! one.show.shareDialog;
+			axios.post('api/shareNote.php', JSON.stringify(one.share)
+			).then(function (response) {
+			  }).catch(function (error) {
+			  console.log(error);
+			  });
+		},
+		getUserShares: function(noteId) {
+			axios.get('api/shareNote.php?note_id=' + noteId
+			).then(function (response) {
+				one.share.toUsers = response.data.sharedToUsers;
+				if(one.share.toUsers.length) {
+					one.post.notePost.shared = true;
+				} else {
+					one.post.notePost.shared = false;
+
+				}
+			  }).catch(function (error) {
+			  console.log(error);
+			  });
+		},
+		cancelUserShare: function(user_id, note_id) {
+			axios.delete('api/shareNote.php?user_id=' + user_id + "&note_id=" + note_id).then(function (response) {
+
+				one.getUserShares(note_id);
+			  }).catch(function (error) {
+				console.log(error);
+				});   
+		},
 	},
 
 });

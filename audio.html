@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" language="JavaScript">
+
+    </script>
+    <title>SimplyNote</title>
+
+    <meta charset="utf-8">
+    </meta>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    </meta>
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    </meta>
+
+    <meta name="theme-color" content="#3367d6">
+    </meta>
+
+    <link rel="shortcut icon" href="img/notepad.png" type="image/x-icon">
+    </link>
+
+    <meta name="description" content="Free Note Taking App!">
+    </meta>
+
+    <link rel="manifest" href="manifest.json">
+    </link>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    </link>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    </link>
+
+    <!-- Compiled and minified JavaScript -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </link>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </meta>
+
+    <link rel="stylesheet" href="style/style.css">
+    </link>
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    </link>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/vue-ckeditor2"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    </link>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+    <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com">
+    </meta>
+
+    <script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+</head>
+
+<body bg-color="#e4ba4e">
+    <div id="vue-app-two" class="vue-app-3">
+        <div class="container-fluid">
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper">
+                        <a href="index.php" class="brand-logo">
+                            <b>My Audio</b>
+                        </a>
+
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+                            <i class="material-icons">menu</i>
+                        </a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="index.php"><b>My Notes</b></a></li>
+                               <li><a href="shoplist.php"><b>My Lists</b></a></li>
+                               <li class="active"><a href="#"><b>My Audio</b></a></li>
+                               <li><a href="api/destroy.php">Logout</a></li>
+                                </ul>
+
+                        <ul class="sidenav" id="mobile-demo">
+                            <li class="black-text center-align">
+                                <b>SimplyNote 2019</b>
+                            </li>
+                            <li><a href="index.php">My Notes</a></li>
+                            <li><a href="shoplist.php">My Lists</a></li>
+                            <li class="active"><a href="#">My Audio</a></li>
+                            <li><a href="api/destroy.php">Sign out</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col m3"></div>
+        <div class="col m9">
+            <form action="api/audio.php" method="POST">
+            <input type="file" accept="audio/*" name="audio" capture>
+            <input type="submit">
+            </form>            
+        </div>
+    </div>
+</div>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/two.js"></script>
+    <script src="js/other.js"></script>
+
+</body>
+
+</html>

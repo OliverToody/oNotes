@@ -6,7 +6,7 @@ session_start();// Starting Session
 require('connect.php');
 // Selecting Database
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_COOKIE['user_id'];
 
 if(!isset($user_id)){
 mysqli_close($conn); // Closing Connection

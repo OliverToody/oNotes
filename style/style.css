@@ -8401,6 +8401,30 @@ body .tp-color {
 body .sidenav-overlay {
   z-index: 2 !important;
 }
+body .share-dialog {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+}
+body .context {
+  z-index: 20;
+  max-width: 500px;
+  max-height: 500px;
+  width: 400px;
+  background: white;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  padding: 5px;
+  text-align: center;
+  position: absolute;
+}
 body .vue-app-2 {
   /***************************************/
   /* Navigation                          */

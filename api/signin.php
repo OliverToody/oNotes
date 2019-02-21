@@ -30,6 +30,9 @@ if(! mysqli_num_rows($result) == 0) {
     $_SESSION['user_id'] = $id; 
     $_SESSION['nickname'] = $nickname1;
     $_SESSION['email'] = $email;
+    setcookie('user_id', $id, time() + (86400 * 30), "/");
+    setcookie('email', $email, time() + (86400 * 30), "/");
+    setcookie('nickname', $nickname1, time() + (86400 * 30), "/");
 
     $out['redirect'] = 'yes';
     }

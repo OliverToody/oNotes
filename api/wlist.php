@@ -4,7 +4,7 @@ require('session.php');
 $method = $_SERVER['REQUEST_METHOD'];
 $out = array();
 if($method == 'GET'){ 
-	$sql = "SELECT working_list.item, working_list.id as item_id, working_list.list_id, working_list.checked, lists.id FROM working_list LEFt JOIN lists ON working_list.list_id = lists.id WHERE lists.user_id = '$user_id'";
+	$sql = "SELECT list_id, id, item, checked FROM list_items WHERE list_id IN (SELECT list_id FROM displayedList WHERE user_id='$user_id')";
 	$query = $conn->query($sql);
 	$items = array();
 	$lists = array();
@@ -27,7 +27,7 @@ if($method == 'GET'){
 
 if($method == 'DELETE'){
 	$item_id_request = $_REQUEST['item_id'];
-	$sql = "DELETE FROM working_list WHERE id='$item_id_request'";
+	$sql = "DELETE FROM list_items WHERE id='$item_id_request'";
 	if ($conn->query($sql) === TRUE) {
 		$out['error'] = 'false';
 	} else {
@@ -43,14 +43,14 @@ $list_id = $input['list_id'];
 $list_name = $input['list_name'];
 $list_category= $input['list_category'];
 $list_items = $input['item'];
-$sql = "DELETE FROM working_list WHERE list_id='$list_id'";
+$sql = "DELETE FROM list_items WHERE list_id='$list_id'";
 	if ($conn->query($sql) === TRUE) {
 		$out['error1'] = 'false';
 	} else {
 		$out['error1'] = $conn->error;
 	}
 
-	$sql = "INSERT INTO working_list (`list_id`,`item`,`user_id`,`checked`) VALUES ";
+	$sql = "INSERT INTO list_items (`list_id`,`item`,`user_id`,`checked`) VALUES ";
 	foreach ($list_items as $item) {
 		$item_item = $item['item'];
 		if($item['checked']) {
