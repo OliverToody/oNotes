@@ -30,58 +30,92 @@
   <div class="top-block">
     <div class="container" id="vue-login">
       <div class="row">
-        <div class="col m12 s12">
-          <div class="valign-wrapper">
-              <div class="valign center-align">
-            <h1 class="text-darken-1 bold-text">SimplyNote</h1>
+        <div class="col m6 s12">
+          <div class="main-block">
+            <h2 class="text-darken-1 bold-text">SimplyNote</h2>
             <h5>
               Capture, organize, and share notes from anywhere.<br/> Your best ideas are
-              always with you.
-            </h5><br />
-            <center>
+              always with you.</h5>
+            </div>
+        </div>
+        <div class="col m6 s12 center-align">
+            <div class="login-form z-depth-2">
+              <h5>Login</h5>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <input id="email" type="email" class="validate">
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="password" type="password" class="validate">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+                  <button class="btn-flat">Create account</button>
+                  <button class="btn">Login</button>
+                  </div>
+                              <center>
             <div class="g-signin2" id="my-signin2" data-onsuccess="onSignIn"></div>
             </center>
-            <!--<button class="btn">Sign in with Google</button>-->
-          </div>
-          </div>
+            <button class="btn-flat" style="border:1px solid gray; width:400px;">Sign in with Google</button>
         </div>
       </div>
     </div>
   </div>
-<!--
-  <div class="features">
-  <div class="container">
-    <div class="row">
-      <div class="col m6 s12">
-        <h2>Be productive anytime, anywhere</h2>
-        <p>SimplyNote lets you create and edit notes while offline as well.</p>
-    </div>
-    <div class="col m6 s12">
-        <img src="img/mb1.png" class="responsive-img right-align">
-    </div>
-    </div>
-    <div class="row">
-        <div class="col m6 s12">
-            <img src="img/mb1.png" class="responsive-img">
-         
-      </div>
-      <div class="col m6 s12">
-          <h2>Record your audio notes</h2>
-          <p>SimplyNote lets you create and edit notes while offline as well.</p>
-      </div>
-      </div>
-      <div class="row">
-          <div class="col m6 s12">
-              <h2>Share your ideas</h2>
-              <p>SimplyNote lets you create and edit notes while offline as well.</p>
-        </div>
-        <div class="col m6 s12">
-            <img src="img/mb1.png" class="responsive-img">
 
-        </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col m4">
+        <div class="feat z-depth-3">
+        <i class="fas fa-sticky-note"></i>
+        <h4>Note</h4>
+        <p>Write down everything that is on your mind. You will fuck</p>
+        <button class="btn-flat">Learn more</button>
+      </div>
+      </div>
+      <div class="col m4">
+          <div class="feat z-depth-3">
+        <i class="fas fa-clipboard-list"></i>
+        <h4>List</h4>
+        <p>Shopping, planning, learning - lists help you to organize systematically</p>
+        <button class="btn-flat">Learn more</button>
+      </div>
+      </div>
+      <div class="col m4">
+          <div class="feat z-depth-3">
+        <i class="fas fa-microphone"></i>
+        <h4>Record</h4>
+        <p>Shopping, planning, learning - lists help you to organize systematically</p>
+        <button class="btn-flat">Learn more</button>
+      </div>
+      </div>
+    </div>
   </div>
+
+<div class="container mobile-block">
+  <div class="row">
+    <div class="col m6">
+      <h3>SimplyNote for Mobile</h3>
+    </div>
+    <div class="col m6">
+      <img src="img/bg.jpg" class="img-preview responsive-img">
+    </div>
   </div>
+</div>
+
+<div class="container-fluid try-now">
+  <div class="row">
+    <div class="col m6">
+      Try SimplyNote now
+    </div>
+    <div class="col m6">
+      <button class="">TRY NOW</button>
+    </div>
+  </div>
+</div>
+
   <footer>
     <div class="container">
       <div class="row">
@@ -100,7 +134,7 @@
       </div>
     </div>
   </footer>
--->
+
   <script>
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
