@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SimplyNote</title>
+  <meta http-equiv="Cache-control" content="public">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous" />
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <!--Import Google Icon Font-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="materialize.min.css" media="screen,projection" />
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="stylesheet" type="text/css" href="style/materialize.css" />
+
+  <meta name="google-signin-client_id" content="161857244723-521c5i25359db4t6p6igfj6vjgd48c5o.apps.googleusercontent.com" />
+  <meta charset="UTF-8">  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+
+<body class="main-page features-page">
+ <div class="main-banner">
+  <div class="valign-wrapper">
+    <h2><b>SimplyNote Features</b></h2>
+  </div>
+ </div>
+ <iframe src="https://www.ubian.sk/navigation#permalink=stop@1000000113#map-sidebar" width="400px" height="800px"></iframe> 
+<div class="container try-now">
+  <div class="row">
+      <div class="col m6">
+        <div class="of">
+          <i class="fas fa-file-alt fa-3x"></i>
+            <h5><b>Note</b></h5>
+            <p>Export your notes to PDF easily or print them directly. Export your notes to PDF easily or print them directly.</p>
+        </div>
+      </div>
+      <div class="col m6">
+          <div class="of">
+            <i class="fas fa-share-alt fa-3x"></i>
+              <h5><b>List</b></h5>
+              <p>Share your notes or lists with your friends. Export your notes to PDF easily or print them directly.</p>
+          </div>        
+        </div>
+    </div>
+  <div class="row">
+    <div class="col m6">
+      <div class="of">
+        <i class="fas fa-file-alt fa-3x"></i>
+          <h5><b>Record</b></h5>
+          <p>Export your notes to PDF easily or print them directly. Export your notes to PDF easily or print them directly.</p>
+      </div>
+    </div>
+    <div class="col m6">
+        <div class="of">
+          <i class="fas fa-share-alt fa-3x"></i>
+            <h5><b>Share</b></h5>
+            <p>Share your notes or lists with your friends. Export your notes to PDF easily or print them directly.</p>
+        </div>        
+      </div>
+  </div>
+  <div class="row">
+    <div class="col m6">
+      <div class="of">
+          <i class="fas fa-list fa-3x"></i>
+          <h5><b>Common items</b></h5>
+          <p>Add common items and add them to lists with one click. Export your notes to PDF easily or print them directly.</p>
+      </div>         
+     </div>
+  <div class="col m6">
+      <div class="of">
+          <i class="fas fa-bars fa-3x"></i>
+          <h5><b>Categories</b></h5>
+          <p>Categorizing your notes and lists keeps things organized and clear. Export your notes to PDF easily or print them directly.</p>
+      </div>          
+    </div>
+  </div>
+</div>
+
+<div class="mobile-block">
+    <div class="valign-wrapper">
+      <div class="valign">
+      <h3>SimplyNote for Mobile</h3>
+      <br>
+      <span class="small-divider"></span>
+      <p>Experience an app like features with the SimplyNote Mobile Progressive Web Application. Export your notes to PDF easily or print them directly.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text"><b>SimplyNote 2019</b></h5>
+          <p class="grey-text text-lighten-4">SimplyNote is an note-taking app that lets you create notes, lists and even audio notes! <br>Be organized and productive with SimplyNote!</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Contact info</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="http://oliweb.netau.net/" target="_blank">About me</a></li>
+            <li><b>Email: oliver.tomondy@gmail.com</b></li><b>
+            <li><b>Phone: 0949 544 711</b></li>
+         
+          </b></ul><b>
+        </b></div><b>
+      </b></div><b>
+    </b></div><b>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2019 SimplyNote
+      <a class="grey-text text-lighten-4 right" href="#!">Oliver Tomondy</a>
+      </div>
+    </div>
+  </b></footer>
+
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      onSignIn(googleUser);
+    }
+
+
+    function onFailure(error) {
+      console.log(error);
+    }
+
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 350,
+        'height': 40,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+
+
+$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+  
+  var $this = $(this),
+      label = $this.prev('label');
+
+	  if (e.type === 'keyup') {
+			if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+    	if( $this.val() === '' ) {
+    		label.removeClass('active highlight'); 
+			} else {
+		    label.removeClass('highlight');   
+			}   
+    } else if (e.type === 'focus') {
+      
+      if( $this.val() === '' ) {
+    		label.removeClass('highlight'); 
+			} 
+      else if( $this.val() !== '' ) {
+		    label.addClass('highlight');
+			}
+    }
+
+});
+
+$('.tab a').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});
+  </script>
+  <script src="js/login.js"></script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+</body>
+
+</html>
